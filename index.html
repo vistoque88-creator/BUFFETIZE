@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buffet Ize</title>
+<link rel="canonical" href="https://buffetize.com.br/">
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
+<meta name="theme-color" content="#2a170f">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Buffet Ize">
+<meta property="og:title" content="Buffet Ize · Buffet, restaurante e rotisseria em Jaboticabal">
+<meta property="og:description" content="Empresa familiar desde 1995. Eventos, restaurante todos os dias das 11h às 14h e marmitas com pedido pelo WhatsApp.">
+<meta property="og:url" content="https://buffetize.com.br/">
+<meta property="og:image" content="https://buffetize.com.br/img/compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="description" content="Buffet, restaurante e rotisseria Ize. Empresa familiar desde 1995: casamentos, confraternizações, coffee break, coquetéis e marmitas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: faixas alternadas marfim / chocolate, como o escudo e a fita da logo; dourado só em detalhes. */
+:root{
+  --choc:#3a2117;      /* marrom do escudo */
+  --choc-2:#55301f;    /* marrom claro da fita */
+  --choc-3:#2a170f;
+  --gold:#c9a24a;      /* dourado do trigo */
+  --gold-deep:#8a6420; /* dourado legível sobre fundo claro */
+  --gold-soft:#e6cf91;
+  --ivory:#fbf7f0;
+  --sand:#f1e7d6;
+  --ink:#2b1a12;
+  --muted:#6f5a4a;
+  --line:#e2d4bd;
+  --ok:#2f6b3a;
+  --err:#a23a2a;
+  --f-display:"Cormorant Garamond", "Times New Roman", Georgia, serif;
+  --f-script:"Pinyon Script", "Brush Script MT", cursive;
+  --f-body:"Jost", "Segoe UI", system-ui, sans-serif;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  --radius:6px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--ivory);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--choc-3)}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.band{padding-block:clamp(56px,8vw,96px)}
+.band--dark{background:var(--choc);color:var(--ivory)}
+.band--sand{background:var(--sand)}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--gold-deep)}
+.band--dark .eyebrow{color:var(--gold)}
+.script{font-family:var(--f-script);font-weight:400;color:var(--gold-deep)}
+.band--dark .script{color:var(--gold)}
+.sec-head{display:grid;gap:10px;margin-bottom:clamp(28px,4vw,44px);max-width:640px}
+.sec-head h2{font-size:clamp(2.1rem,4.4vw,3.2rem)}
+.sec-head p{color:var(--muted)}
+.band--dark .sec-head p{color:#e9dcc6}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:500 1rem/1 var(--f-body);letter-spacing:.02em;padding:15px 24px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn--gold{background:var(--gold);color:var(--choc-3)}
+.btn--gold:hover{background:var(--gold-soft)}
+.btn--choc{background:var(--choc);color:var(--ivory)}
+.btn--choc:hover{background:var(--choc-2)}
+.btn--ghost{border-color:currentColor;background:transparent}
+.btn--wa{background:#1f7a4d;color:#fff}
+.btn--wa:hover{background:#25925c}
+.btn svg{width:20px;height:20px;flex:none}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+/* Cabeçalho */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--choc-3);color:var(--ivory);border-bottom:1px solid #4a2c1e}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:80px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:auto;height:70px}
+.brand span{font-family:var(--f-display);font-size:1.05rem;line-height:1.1;color:var(--gold-soft)}
+.brand small{display:block;font-family:var(--f-body);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:#cdb99a}
+.nav{margin-left:auto;display:flex;gap:26px;align-items:center}
+.nav a{text-decoration:none;font-size:.95rem;color:#efe3cf}
+.nav a:hover{color:var(--gold)}
+.nav .btn{padding:11px 18px;font-size:.9rem;color:var(--choc-3)}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid #6b4a36;color:var(--ivory);border-radius:6px;padding:8px 12px;font:500 .9rem var(--f-body);cursor:pointer}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--choc-3);flex-direction:column;align-items:stretch;gap:0;padding:8px var(--gutter-r) 18px var(--gutter-l);border-bottom:1px solid #4a2c1e}
+  .nav.open{display:flex}
+  .nav a{padding:12px 0;border-bottom:1px solid #3d2519}
+  .nav .btn{margin-top:12px;border-bottom:0}
+}
+
+/* Hero com carrossel */
+.hero{position:relative;min-height:clamp(560px,76vh,720px);overflow:hidden;background:var(--choc-3);color:#fff}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 7s ease-out}
+.slide.on img{transform:scale(1)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(26,13,8,.86) 0%,rgba(26,13,8,.6) 42%,rgba(26,13,8,.08) 78%),linear-gradient(0deg,rgba(26,13,8,.55),transparent 40%);pointer-events:none}
+.hero-copy{position:relative;z-index:2;display:flex;align-items:center;min-height:inherit;padding-block:56px 104px}
+.hero-copy .wrap{width:100%}
+.hero-copy .inner{max-width:560px;display:grid;gap:18px}
+.hero .since{display:flex;align-items:center;gap:14px;color:var(--gold-soft);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase}
+.hero .since::before{content:"";width:38px;height:1px;background:var(--gold)}
+.hero h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:500;color:#fff}
+.hero h1 em{font-family:var(--f-script);font-style:normal;color:var(--gold);font-size:1.12em;font-weight:400;display:block;line-height:1.1;margin-bottom:.12em}
+.hero p{font-size:1.08rem;color:#f0e5d3;max-width:460px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero .btn--ghost{color:#fff}
+.xmas{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:4px;padding-top:16px;border-top:1px solid rgba(230,207,145,.3)}
+.xmas span{font-size:.9rem;color:var(--gold-soft)}
+.xmas span a{color:#fff;text-underline-offset:3px}
+.btn--xmas{background:#8e1f1f;color:#fff;border-color:var(--gold)}
+.btn--xmas:hover{background:#a82a2a}
+.hero-ui{position:absolute;z-index:3;left:0;right:0;bottom:22px}
+.hero-ui .wrap{display:flex;align-items:center;gap:14px;justify-content:space-between}
+.dots{display:flex;gap:8px}
+.dots button{width:28px;height:3px;border:0;padding:0;background:rgba(255,255,255,.35);cursor:pointer}
+.dots button.on{background:var(--gold)}
+.slide-tag{font-family:var(--f-display);font-style:italic;font-size:1.15rem;color:var(--gold-soft)}
+.arrows{display:flex;gap:8px}
+.arrows button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.25);color:#fff;cursor:pointer;font-size:1.1rem}
+.arrows button:hover{border-color:var(--gold);color:var(--gold)}
+@media (max-width:640px){
+  .hero{min-height:560px}
+  .hero-copy{padding-block:64px 96px}
+  .hero::after{background:linear-gradient(0deg,rgba(26,13,8,.92) 10%,rgba(26,13,8,.55) 100%)}
+  .slide-tag{display:none}
+}
+
+/* Faixa de fatos */
+.facts{background:var(--choc-3);color:#efe3cf;border-top:1px solid #4a2c1e}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:22px}
+.fact{display:flex;align-items:baseline;gap:10px;font-size:.92rem}
+.fact b{font-variant-numeric:lining-nums;font-family:var(--f-display);font-size:1.7rem;font-weight:600;color:var(--gold)}
+@media (max-width:700px){.facts .wrap{grid-template-columns:1fr;gap:6px}}
+
+/* Linha do tempo */
+.hist{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:clamp(32px,6vw,80px);align-items:center}
+@media (max-width:900px){.hist{grid-template-columns:1fr}}
+.hist-lead{display:grid;gap:10px;justify-items:start}
+.anos{display:flex;align-items:baseline;gap:12px;line-height:.9;color:var(--choc)}
+.anos b{font-family:var(--f-display);font-weight:700;font-size:clamp(6rem,14vw,9.5rem);color:var(--choc);font-variant-numeric:lining-nums;letter-spacing:-.02em}
+.anos span{font-family:var(--f-script);font-size:clamp(2.6rem,5vw,3.6rem);color:var(--gold-deep)}
+.hist-lead h2{font-size:clamp(1.7rem,3.2vw,2.3rem);font-weight:500;font-style:italic;color:var(--choc-2)}
+.hist-lead p{color:var(--muted);max-width:420px}
+.tl{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:0}
+.tl::before{content:"";position:absolute;left:90px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--gold),var(--gold-deep))}
+.tl li{position:relative;display:grid;grid-template-columns:76px minmax(0,1fr);gap:0 30px;padding-block:14px}
+.tl .y{font-family:var(--f-display);font-weight:700;font-size:1.45rem;color:var(--choc);text-align:right;font-variant-numeric:lining-nums tabular-nums;line-height:1.2;padding-right:10px}
+.tl li::after{content:"";position:absolute;left:84px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--sand);border:2px solid var(--gold-deep)}
+.tl .c{display:grid;gap:2px}
+.tl .c b{font-variant-numeric:lining-nums;font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:var(--ink)}
+.tl .c span{color:var(--muted);font-size:.95rem}
+.tl li.now::after{background:var(--gold);border-color:var(--choc);box-shadow:0 0 0 5px rgba(201,162,74,.25)}
+.tl li.now .y{color:var(--gold-deep)}
+.tl li.now .c b{color:var(--choc)}
+
+/* Restaurante */
+.rest{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,6vw,72px);align-items:start}
+@media (max-width:900px){.rest{grid-template-columns:1fr}}
+.rest-lead{display:grid;gap:14px;justify-items:start}
+.rest-lead h2{font-size:clamp(2.3rem,4.6vw,3.4rem);color:#fff}
+.rest-lead p{color:#e9dcc6;max-width:440px}
+.rest-hours{font-size:1.15rem}
+.rest-hours b{font-family:var(--f-display);font-size:1.9rem;font-weight:600;color:var(--gold);font-variant-numeric:lining-nums}
+.today{display:grid;gap:4px;border:1px solid #6b4a36;border-left:3px solid var(--gold);border-radius:var(--radius);padding:14px 18px;background:rgba(0,0,0,.18);margin-top:6px}
+.today b{color:#fff;font-weight:500}
+.today span{color:#e9dcc6;font-size:.95rem}
+.today.closed{border-left-color:#d9a48f}
+.also{display:grid;gap:10px;margin-top:4px}
+.also ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.also li{border:1px solid #7a5640;border-radius:999px;padding:6px 14px;font-size:.95rem;color:#f3e9d8;background:rgba(201,162,74,.08)}
+.also-more{font-family:var(--f-script);font-size:1.9rem;line-height:1;color:var(--gold)!important}
+.prices{display:grid;gap:28px}
+.pgroup h3{font-size:1.6rem;color:var(--gold-soft);padding-bottom:10px;border-bottom:1px solid #6b4a36}
+.pgroup dl{margin:0;display:grid}
+.pgroup dl div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 10px;border-bottom:1px dashed #5a3727;border-radius:4px}
+.pgroup dt{display:grid;gap:2px;color:#f3e9d8;font-size:1.05rem}
+.pgroup dt span{font-size:.82rem;color:#cdb99a}
+.pgroup dd{margin:0;font-family:var(--f-display);font-size:1.75rem;font-weight:700;color:#fff;white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
+.pgroup dd small{font-family:var(--f-body);font-size:.8rem;font-weight:400;color:#cdb99a}
+.pgroup dl div.on{background:rgba(201,162,74,.14)}
+.pgroup dl div.on dt::after{content:"Hoje";justify-self:start;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--choc-3);padding:2px 8px;border-radius:999px;margin-top:4px}
+.pgroup dl div.na{opacity:.5}
+
+/* Eventos */
+.events{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ev{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.ev img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.ev div{padding:18px 20px 22px;display:grid;gap:6px}
+.ev h3{font-size:1.5rem}
+.ev p{color:var(--muted);font-size:.95rem}
+.events-foot{margin-top:34px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:26px}
+.events-foot p{font-family:var(--f-display);font-size:1.35rem;font-style:italic;color:var(--choc-2)}
+@media (max-width:900px){.events{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.events{grid-template-columns:1fr}}
+
+/* Formulários */
+.form{display:grid;gap:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.legend{font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font:400 1rem var(--f-body);color:var(--ink);background:#fff;border:1px solid #d6c6ac;border-radius:var(--radius);padding:12px 14px;width:100%;min-width:0}
+input[type=checkbox],input[type=radio]{width:auto;padding:0;flex:none}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:0;border-color:var(--gold)}
+.err{color:var(--err);font-size:.9rem;min-height:1.2em}
+.hint{font-size:.85rem;color:var(--muted)}
+
+/* Orçamento */
+.quote{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:start}
+.quote-copy{display:grid;gap:18px}
+.quote-copy h2{font-size:clamp(2.3rem,4.6vw,3.4rem);color:#fff}
+.quote-copy p{color:#e9dcc6;max-width:440px}
+.quote-copy ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:10px}
+.quote-copy li{display:flex;gap:12px;color:#efe3cf}
+.quote-copy li::before{content:"";flex:none;width:7px;height:7px;margin-top:.62em;transform:rotate(45deg);background:var(--gold)}
+.card-form{background:var(--ivory);color:var(--ink);border-radius:var(--radius);padding:clamp(22px,3.5vw,36px);border-top:3px solid var(--gold)}
+.card-form h3{font-size:1.7rem;margin-bottom:4px}
+@media (max-width:860px){.quote{grid-template-columns:1fr}}
+
+/* Marmitas */
+.mm-top{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:end;justify-content:space-between;margin-bottom:28px}
+.notice{display:inline-flex;gap:8px;align-items:center;background:var(--sand);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.9rem;color:var(--choc-2)}
+.mm{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:32px;align-items:start}
+@media (max-width:980px){.mm{grid-template-columns:1fr}}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,28px);display:grid;gap:18px}
+.step + .step{margin-top:20px}
+.step-h{display:flex;gap:14px;align-items:baseline}
+.step-h .n{font-family:var(--f-display);font-size:1.9rem;color:var(--gold-deep);line-height:1}
+.step-h h3{font-size:1.55rem}
+.daybox{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.daybox input{width:auto}
+.dayinfo{font-size:.95rem;padding:8px 14px;border-radius:var(--radius);background:var(--sand);color:var(--choc-2)}
+.dayinfo.restrict{background:#f7e3d4;color:#7a3416}
+.grp{display:grid;gap:10px}
+.grp-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.grp-t h4{margin:0;font-family:var(--f-display);font-size:1.25rem;font-weight:600}
+.grp-t span{font-size:.82rem;color:var(--muted)}
+.sizes{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.size{position:relative;display:grid;gap:4px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);cursor:pointer;background:var(--ivory);transition:border-color .15s,background .15s}
+.size input{position:absolute;opacity:0;pointer-events:none}
+.size .p{font-family:var(--f-display);font-size:1.45rem;font-weight:700;color:var(--choc);font-variant-numeric:tabular-nums}
+.size .d{font-size:.9rem;color:var(--muted);line-height:1.45}
+.size:hover{border-color:var(--gold)}
+.size:has(input:checked){border-color:var(--choc);background:#fff;box-shadow:inset 0 0 0 1px var(--choc)}
+.size:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.size.off{opacity:.45;cursor:not-allowed}
+.size.off .d::after{content:" · indisponível domingos e feriados";color:#7a3416}
+.opts{display:grid;gap:18px}
+.optset{border:0;padding:0;margin:0;display:grid;gap:8px}
+.optset legend{padding:0;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid #d6c6ac;border-radius:999px;cursor:pointer;font-size:.95rem;background:#fff}
+.chip input{accent-color:var(--choc);margin:0}
+.chip:has(input:checked){background:var(--choc);border-color:var(--choc);color:var(--ivory)}
+.chip:has(input:disabled){opacity:.45;cursor:not-allowed}
+.chip small{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.extras{display:flex;flex-wrap:wrap;gap:14px 26px}
+.qty{display:flex;align-items:center;gap:10px;font-size:.95rem}
+.qty .ctl{display:inline-flex;border:1px solid #d6c6ac;border-radius:999px;overflow:hidden;background:#fff}
+.qty button{width:34px;height:34px;border:0;background:none;cursor:pointer;font-size:1.1rem;color:var(--choc)}
+.qty button:hover{background:var(--sand)}
+.qty output{min-width:28px;text-align:center;font-variant-numeric:tabular-nums;font-weight:500;align-self:center}
+.add-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px}
+.add-row .lt{font-family:var(--f-display);font-size:1.4rem;font-weight:700;font-variant-numeric:tabular-nums}
+.mm-foto{margin:0;display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:18px;align-items:center;background:var(--ivory);border:1px solid var(--line);border-radius:var(--radius);padding:12px}
+.mm-foto img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+.mm-foto figcaption{display:grid;gap:4px;font-size:.95rem;color:var(--muted)}
+.mm-foto figcaption b{font-family:var(--f-display);font-size:1.5rem;color:var(--choc)}
+@media (max-width:520px){.mm-foto{grid-template-columns:1fr}}
+.size .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;margin-bottom:6px}
+.placeholder-note{font-size:.85rem;color:#7a3416;background:#fbeee2;border-radius:var(--radius);padding:8px 12px}
+
+/* Carrinho */
+.cart{position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px);background:var(--choc);color:var(--ivory);border-radius:var(--radius);padding:24px;display:grid;gap:16px}
+@media (max-width:980px){.cart{position:static}}
+.cart h3{font-size:1.6rem;color:#fff}
+.cart-empty{color:#cdb99a;font-size:.95rem}
+.cart ol{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.cart li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding-bottom:12px;border-bottom:1px solid #5a3727}
+.cart li b{font-weight:500}
+.cart li .s{grid-column:1/2;font-size:.82rem;color:#d9c8ad;line-height:1.45}
+.cart li .v{font-variant-numeric:tabular-nums;color:var(--gold-soft)}
+.cart li .rm{grid-column:2;justify-self:end;background:none;border:0;color:#d9a48f;font:400 .8rem var(--f-body);cursor:pointer;text-decoration:underline;padding:0}
+.cart li.bad b::after{content:" · não disponível nesta data";color:#ffb59a;font-size:.8rem}
+.tot{display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.tot div{display:flex;justify-content:space-between;font-size:.95rem;color:#e9dcc6}
+.tot .big{font-size:1.25rem;color:#fff;border-top:1px solid #5a3727;padding-top:8px;margin-top:4px}
+.tot .big span:last-child{font-family:var(--f-display);font-size:1.7rem;font-weight:700;color:var(--gold)}
+
+.pix{display:grid;gap:8px;background:var(--sand);border-radius:var(--radius);padding:14px 16px}
+.pix code{font:600 1.05rem/1.3 var(--f-body);letter-spacing:.03em;color:var(--choc);word-break:break-all}
+.pix .copy{justify-self:start;background:var(--choc);color:var(--ivory);border:0;border-radius:999px;padding:8px 14px;font:500 .85rem var(--f-body);cursor:pointer}
+
+/* Painel de envio */
+.sent{display:grid;gap:12px;background:#eef5ef;border:1px solid #bcd6c1;border-radius:var(--radius);padding:16px 18px;color:#1f3d27}
+.sent pre{white-space:pre-wrap;font:400 .85rem/1.5 var(--f-body);margin:0;max-height:220px;overflow:auto;background:#fff;border-radius:4px;padding:10px 12px;color:var(--ink)}
+.sent .acts{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Encomendas */
+.orders{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:760px){.orders{grid-template-columns:1fr}}
+.order{position:relative;overflow:hidden;border-radius:var(--radius);min-height:300px;display:flex;align-items:flex-end;color:#fff}
+.order img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.order::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,13,8,.92) 15%,rgba(26,13,8,.35) 100%)}
+.order div{position:relative;z-index:1;padding:28px;display:grid;gap:10px;justify-items:start}
+.order h3{font-size:2rem;color:#fff}
+.order p{color:#efe3cf;max-width:420px}
+.order .tel{font-size:.9rem;color:var(--gold-soft);letter-spacing:.04em}
+
+/* Localização */
+.places{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:760px){.places{grid-template-columns:1fr}}
+.place{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:var(--radius);padding:clamp(22px,3vw,32px);display:grid;gap:10px;align-content:start}
+.place h3{font-size:1.8rem}
+.place address{font-style:normal;font-size:1.1rem;line-height:1.5;color:var(--ink)}
+.place .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.place .btn--ghost{color:var(--choc)}
+.place .btn{padding:12px 20px;font-size:.95rem}
+
+/* Rodapé */
+.foot{background:var(--choc-3);color:#e2d3bb;padding-block:56px 36px}
+.foot .grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:32px}
+@media (max-width:860px){.foot .grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot .grid{grid-template-columns:1fr}}
+.foot h4{font-family:var(--f-display);font-size:1.25rem;color:var(--gold);margin:0 0 10px;font-weight:600}
+.foot p,.foot li{font-size:.94rem}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.foot .logo-big img{width:170px;height:auto}
+.foot .copy-line{margin-top:40px;padding-top:20px;border-top:1px solid #3d2519;font-size:.82rem;color:#a99377;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+/* Botão flutuante */
+.fab{position:fixed;z-index:40;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:#1f7a4d;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.fab svg{width:30px;height:30px;fill:#fff}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3dc95"/><stop offset=".5" stop-color="#c9a24a"/><stop offset="1" stop-color="#8a6420"/>
+    </linearGradient>
+    <radialGradient id="lgShield" cx=".5" cy=".42" r=".65">
+      <stop offset="0" stop-color="#7a4a2e"/><stop offset=".6" stop-color="#4b2a1a"/><stop offset="1" stop-color="#2e180e"/>
+    </radialGradient>
+    <linearGradient id="lgRibbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a3d27"/><stop offset="1" stop-color="#3a2117"/>
+    </linearGradient>
+  </defs>
+  <symbol id="wa" viewBox="0 0 32 32"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.7C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.8.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5.1 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Buffet Ize, início">
+      <img src="img/logo.png" alt="" width="538" height="464">
+      <span>Buffet Ize<small>Desde 1995</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav">
+      <a href="#historia">História</a>
+      <a href="#restaurante">Restaurante</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#orcamento">Orçamento</a>
+      <a href="#marmitas">Marmitas</a>
+      <a href="#encomendas">Encomendas</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#contato">Contato</a>
+      <a class="btn btn--gold" href="#marmitas">Pedir marmita</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio" aria-label="Fotos de eventos">
+  <div id="slides"></div>
+  <div class="hero-copy">
+    <div class="wrap">
+      <div class="inner">
+        <span class="since">Empresa familiar desde 1995</span>
+        <h1><em>Buffet Ize</em>Buffet, restaurante e rotisseria</h1>
+        <p>Cozinhamos para casamentos, confraternizações, coffee breaks e coquetéis, e todo dia preparamos marmitas com comida caseira.</p>
+        <div class="ctas">
+          <a class="btn btn--gold" href="#orcamento">Solicitar orçamento</a>
+          <a class="btn btn--ghost" href="#marmitas">Pedir marmita</a>
+        </div>
+        <div class="xmas">
+          <a class="btn btn--xmas" target="_blank" rel="noopener" id="waFimHero"><svg><use href="#wa"/></svg>Pedidos de fim de ano</a>
+          <span>Natal até 15/12 · Réveillon até 26/12 · <a href="https://drive.google.com/file/d/1BhBRwXU1snN-zgU8mXF0DH6hGjGFsReS/view" target="_blank" rel="noopener">ver cardápio</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-ui">
+    <div class="wrap">
+      <div class="dots" id="dots" role="tablist" aria-label="Escolher foto"></div>
+      <span class="slide-tag" id="slideTag" aria-live="polite"></span>
+      <div class="arrows">
+        <button type="button" id="prev" aria-label="Foto anterior">&#8249;</button>
+        <button type="button" id="next" aria-label="Próxima foto">&#8250;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="facts">
+  <div class="wrap">
+    <div class="fact"><b><span class="anos-n">31</span> anos</b> de tradição e qualidade</div>
+    <div class="fact"><b>Família</b> receitas passadas de geração em geração</div>
+    <div class="fact"><b>11h às 14h</b> restaurante aberto todos os dias</div>
+  </div>
+</div>
+
+<section class="band band--sand" id="historia">
+  <div class="wrap">
+    <div class="hist">
+      <div class="hist-lead">
+        <img src="img/logo.png" alt="Logo Buffet Ize" width="538" height="464" style="width:170px;height:auto;margin-bottom:6px">
+        <span class="eyebrow">Nossa história</span>
+        <div class="anos"><b class="anos-n">31</b><span>anos</span></div>
+        <h2>de tradição e qualidade à mesa</h2>
+        <p>Desde 1995 a família Ize cozinha para os momentos importantes da cidade, com o mesmo cuidado do primeiro dia.</p>
+      </div>
+      <ol class="tl" id="timeline"></ol>
+    </div>
+  </div>
+</section>
+
+<section class="band band--dark" id="restaurante">
+  <div class="wrap">
+    <div class="rest">
+      <div class="rest-lead">
+        <span class="eyebrow">Restaurante</span>
+        <h2>Almoço todos os dias</h2>
+        <p class="rest-hours"><b>11h às 14h</b> · de segunda a domingo</p>
+        <p>Comida caseira feita na hora, do jeito da família Ize. Escolha o self-service por quilo, o prato feito ou coma à vontade.</p>
+        <div class="also">
+          <span class="eyebrow">Também temos</span>
+          <ul>
+            <li>Pães</li><li>Roscas</li><li>Sequilhos</li><li>Sobremesas</li><li>Sopas</li><li>Caldos</li><li>Massas</li><li>Molhos</li><li>Salgados para eventos</li>
+          </ul>
+          <p class="also-more">e muito mais!</p>
+        </div>
+        <div class="today" id="hoje"></div>
+      </div>
+      <div class="prices">
+        <div class="pgroup">
+          <h3>Self-service por quilo</h3>
+          <dl>
+            <div data-k="semana"><dt>Segunda a sexta</dt><dd>R$ 84,90 <small>/kg</small></dd></div>
+            <div data-k="sabfer"><dt>Sábados e feriados</dt><dd>R$ 98,90 <small>/kg</small></dd></div>
+            <div data-k="domingo"><dt>Domingos</dt><dd>R$ 101,90 <small>/kg</small></dd></div>
+          </dl>
+        </div>
+        <div class="pgroup">
+          <h3>Na semana</h3>
+          <dl>
+            <div data-k="pf"><dt>Prato feito<span>Segunda a sexta, exceto feriados</span></dt><dd>R$ 40,00</dd></div>
+            <div data-k="av"><dt>À vontade<span>Segunda a sexta, exceto feriados</span></dt><dd>R$ 70,00</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="eventos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Eventos</span>
+      <h2>Do coffee break ao casamento, cuidamos da mesa inteira</h2>
+      <p>Montamos o cardápio com você, levamos equipe e estrutura e servimos no seu espaço ou no local do evento.</p>
+    </div>
+    <div class="events">
+      <article class="ev"><img src="img/casamento.jpg" alt="Mãos de noivos com alianças e buquê" loading="lazy"><div><h3>Casamentos</h3><p>Jantar, buffet ou coquetel, do brinde de entrada ao último doce.</p></div></article>
+      <article class="ev"><img src="img/confraternizacao.jpg" alt="Grupo de amigos em volta da mesa" loading="lazy"><div><h3>Confraternizações</h3><p>Fim de ano da empresa, encontro de família ou festa entre amigos.</p></div></article>
+      <article class="ev"><img src="img/coffee-break.jpg" alt="Mesa farta com frutas, pães e doces" loading="lazy"><div><h3>Coffee break</h3><p>Pães, salgados, bolos, frutas e bebidas para reuniões e cursos.</p></div></article>
+      <article class="ev"><img src="img/coquetel.jpg" alt="Drinques coloridos no balcão" loading="lazy"><div><h3>Coquetéis</h3><p>Finger foods e volantes servidos à francesa para receber em pé.</p></div></article>
+      <article class="ev"><img src="img/mesa-casamento.jpg" alt="Mesa posta com flores e taças" loading="lazy"><div><h3>Aniversários e batizados</h3><p>Almoço ou jantar para celebrar as datas da família.</p></div></article>
+      <article class="ev"><img src="img/jantar.jpg" alt="Mesa de jantar com flores e taças" loading="lazy"><div><h3>Eventos corporativos</h3><p>Almoços, lançamentos e treinamentos com serviço no horário certo.</p></div></article>
+    </div>
+    <div class="events-foot">
+      <p>Tem outro tipo de evento em mente? A gente também faz.</p>
+      <a class="btn btn--choc" href="#orcamento">Solicitar um orçamento</a>
+    </div>
+  </div>
+</section>
+
+<section class="band band--dark" id="orcamento">
+  <div class="wrap quote">
+    <div class="quote-copy">
+      <span class="eyebrow">Orçamento</span>
+      <h2>Solicite um orçamento</h2>
+      <p>Preencha os dados abaixo e envie pelo WhatsApp. Respondemos com sugestões de cardápio e valores para o seu evento.</p>
+      <ul>
+        <li>Cardápio montado para o número de convidados</li>
+        <li>Equipe de garçons e copeiros</li>
+        <li>Atendimento direto com a família Ize</li>
+      </ul>
+    </div>
+    <form class="card-form form" id="fOrc" novalidate>
+      <h3>Dados do evento</h3>
+      <div class="field"><label for="oNome">Nome e sobrenome</label><input id="oNome" autocomplete="name" placeholder="Ex.: Maria Souza" required></div>
+      <div class="row">
+        <div class="field"><label for="oTel">Telefone</label><input id="oTel" type="tel" autocomplete="tel" inputmode="tel" placeholder="(16) 99999-9999" required></div>
+        <div class="field"><label for="oTipo">Tipo de evento</label>
+          <select id="oTipo" required>
+            <option value="">Escolha…</option>
+            <option>Casamento</option><option>Confraternização</option><option>Coffee break</option><option>Coquetel</option>
+            <option>Aniversário</option><option>Batizado / chá de bebê</option><option>Formatura</option><option>Evento corporativo</option><option>Outro</option>
+          </select></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="oQtd">Quantidade de convidados</label><input id="oQtd" type="number" min="1" inputmode="numeric" placeholder="Ex.: 120" required></div>
+        <div class="field"><label for="oData">Data prevista</label><input id="oData" type="date" required></div>
+      </div>
+      <p class="err" id="oErr" role="alert"></p>
+      <button class="btn btn--wa" type="submit"><svg><use href="#wa"/></svg>Enviar pelo WhatsApp</button>
+      <div id="oSent"></div>
+    </form>
+  </div>
+</section>
+
+<section class="band" id="marmitas">
+  <div class="wrap">
+    <div class="mm-top">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Marmitas</span>
+        <h2>Monte sua marmita</h2>
+        <p>Escolha o dia, o tamanho e os itens do cardápio. O pedido chega pronto no nosso WhatsApp.</p>
+      </div>
+      <span class="notice">Valores válidos a partir de 01/12/2026</span>
+    </div>
+
+    <div class="mm">
+      <div>
+        <div class="step">
+          <div class="step-h"><span class="n">1</span><h3>Dia do pedido</h3></div>
+          <div class="daybox">
+            <input type="date" id="mData" aria-label="Data do pedido">
+            <span class="dayinfo" id="dayInfo"></span>
+          </div>
+          <p class="hint">De segunda a sábado servimos todas as marmitas. Domingos e feriados, apenas as individuais.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-h"><span class="n">2</span><h3>Tamanho</h3></div>
+          <div id="sizes" class="opts"></div>
+        </div>
+
+        <div class="step" id="stepOpts">
+          <div class="step-h"><span class="n">3</span><h3>Cardápio do dia</h3></div>
+          <figure class="mm-foto" id="mmFoto" hidden><img alt=""><figcaption></figcaption></figure>
+          <p class="placeholder-note" id="menuNote">Cardápio de exemplo. Será trocado pelo cardápio oficial do Buffet Ize.</p>
+          <div class="opts" id="opts"></div>
+          <div class="extras">
+            <div class="qty">Quantidade <span class="ctl"><button type="button" data-q="qtd" data-d="-1" aria-label="Menos uma marmita">−</button><output id="qtd">1</output><button type="button" data-q="qtd" data-d="1" aria-label="Mais uma marmita">+</button></span></div>
+            <div class="qty">Embalagem adicional (R$ 5) <span class="ctl"><button type="button" data-q="emb" data-d="-1" aria-label="Menos uma embalagem">−</button><output id="emb">0</output><button type="button" data-q="emb" data-d="1" aria-label="Mais uma embalagem">+</button></span></div>
+            <div class="qty">Salada adicional (R$ 4) <span class="ctl"><button type="button" data-q="sal" data-d="-1" aria-label="Menos uma salada">−</button><output id="sal">0</output><button type="button" data-q="sal" data-d="1" aria-label="Mais uma salada">+</button></span></div>
+          </div>
+          <div class="opts" id="salExtra" hidden></div>
+          <p class="err" id="addErr" role="alert"></p>
+          <div class="add-row">
+            <span class="lt" id="lineTot">R$ 0,00</span>
+            <button type="button" class="btn btn--choc" id="addBtn">Adicionar ao pedido</button>
+          </div>
+        </div>
+
+        <form class="step form" id="fPed" novalidate>
+          <div class="step-h"><span class="n">4</span><h3>Dados para envio</h3></div>
+          <div class="field"><label for="pNome">Nome e sobrenome</label><input id="pNome" autocomplete="name" required></div>
+          <fieldset class="optset">
+            <legend class="legend">Como quer receber?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="modo" value="entrega" id="mEnt" checked> Entrega (+ R$ 8,00)</label>
+              <label class="chip"><input type="radio" name="modo" value="retirada" id="mRet"> Retirar no local</label>
+            </div>
+          </fieldset>
+          <div class="field" id="endWrap"><label for="pEnd">Endereço de entrega</label><input id="pEnd" autocomplete="street-address" placeholder="Rua, número, bairro e ponto de referência"></div>
+          <div class="field"><label for="pHora">Horário</label><input id="pHora" type="time" min="11:00" max="14:00" step="900" required style="max-width:200px"><span class="hint">Das 11h às 14h</span></div>
+          <fieldset class="optset">
+            <legend class="legend">Forma de pagamento</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="pag" value="Cartão de crédito" id="pg1"> Crédito</label>
+              <label class="chip"><input type="radio" name="pag" value="Cartão de débito" id="pg2"> Débito</label>
+              <label class="chip"><input type="radio" name="pag" value="Dinheiro" id="pg3"> Dinheiro</label>
+              <label class="chip"><input type="radio" name="pag" value="PIX" id="pg4"> PIX</label>
+            </div>
+          </fieldset>
+          <div class="field" id="trocoWrap" hidden><label for="pTroco">Precisa de troco? Para quanto?</label><input id="pTroco" inputmode="decimal" placeholder="Ex.: troco para R$ 100 (deixe em branco se não precisar)"></div>
+          <div class="pix" id="pixWrap" hidden>
+            <span class="legend">Chave PIX (CNPJ)</span>
+            <code id="pixKey">40.360.468/0001-01</code>
+            <button type="button" class="copy" id="pixCopy">Copiar chave</button>
+            <span class="hint">Depois de pagar, envie o comprovante na mesma conversa do WhatsApp.</span>
+          </div>
+          <div class="field"><label for="pObs">Informações adicionais</label><textarea id="pObs" placeholder="Ex.: sem cebola, troco, interfone, etc."></textarea></div>
+        </form>
+      </div>
+
+      <aside class="cart" aria-label="Seu pedido">
+        <h3>Seu pedido</h3>
+        <p class="cart-empty" id="cartEmpty">Nenhuma marmita ainda. Escolha o tamanho e os itens e toque em “Adicionar ao pedido”.</p>
+        <ol id="cartList"></ol>
+        <div class="tot">
+          <div><span>Marmitas</span><span id="tSub">R$ 0,00</span></div>
+          <div><span>Taxa de entrega</span><span id="tEnt">R$ 8,00</span></div>
+          <div class="big"><span>Total</span><span id="tTot">R$ 0,00</span></div>
+        </div>
+        <p class="err" id="pErr" role="alert" style="color:#ffb59a"></p>
+        <button class="btn btn--wa" type="submit" form="fPed"><svg><use href="#wa"/></svg>Enviar pedido pelo WhatsApp</button>
+        <div id="pSent"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="band band--sand" id="encomendas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Encomendas</span>
+      <h2>Encomendas para levar</h2>
+      <p>Pratos da rotisseria vendidos por quilo e a nossa linha especial de fim de ano.</p>
+    </div>
+    <div class="orders">
+      <article class="order">
+        <img src="img/buffet.jpg" alt="Travessas de buffet com salgados e saladas" loading="lazy">
+        <div>
+          <h3>Encomendas avulsas</h3>
+          <p>Carnes, massas, acompanhamentos e saladas por quilo, para almoço de família ou reunião em casa.</p>
+          <span class="tel">WhatsApp (16) 3204-3321</span>
+          <a class="btn btn--wa" target="_blank" rel="noopener" id="waKilo"><svg><use href="#wa"/></svg>Encomendar por quilo</a>
+        </div>
+      </article>
+      <article class="order">
+        <img src="img/prato.jpg" alt="Prato servido em mesa de jantar" loading="lazy">
+        <div>
+          <h3>Encomendas de fim de ano</h3>
+          <p>Entradas, antepastos, farofas, assados e sobremesas para a ceia de Natal e Ano Novo.</p>
+          <span class="tel">Natal: encomendas até 15/12 · Réveillon: até 26/12</span>
+          <span class="tel">WhatsApp fim de ano (16) 3202-3260</span>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <a class="btn btn--ghost" style="color:#fff" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1BhBRwXU1snN-zgU8mXF0DH6hGjGFsReS/view">Ver cardápio de fim de ano 2026</a>
+            <a class="btn btn--gold" target="_blank" rel="noopener" id="waFim"><svg><use href="#wa"/></svg>Encomendar ceia</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="localizacao">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Localização</span>
+      <h2>Venha nos visitar em Jaboticabal</h2>
+      <p>Toque em um dos botões para abrir a rota no Google Maps ou no Waze.</p>
+    </div>
+    <div class="places">
+      <article class="place">
+        <span class="eyebrow">Restaurante</span>
+        <h3>Restaurante e rotisseria</h3>
+        <address>Rua Francisco Ferrari, 171<br>Jardim Morumbi · Jaboticabal, SP</address>
+        <p class="hint">Todos os dias, das 11h às 14h</p>
+        <div class="acts">
+          <a class="btn btn--choc" target="_blank" rel="noopener" data-rota="gmaps" data-end="Rua Francisco Ferrari, 171, Jardim Morumbi, Jaboticabal - SP">Rota no Google Maps</a>
+          <a class="btn btn--ghost" target="_blank" rel="noopener" data-rota="waze" data-end="Rua Francisco Ferrari, 171, Jardim Morumbi, Jaboticabal - SP">Abrir no Waze</a>
+        </div>
+      </article>
+      <article class="place">
+        <span class="eyebrow">Escritório comercial</span>
+        <h3>Orçamentos e eventos</h3>
+        <address>Rua Coronel Odilon Ortiz, 60<br>Nova Jaboticabal · Jaboticabal, SP</address>
+        <p class="hint">Atendimento para eventos e orçamentos</p>
+        <div class="acts">
+          <a class="btn btn--choc" target="_blank" rel="noopener" data-rota="gmaps" data-end="Rua Coronel Odilon Ortiz, 60, Nova Jaboticabal, Jaboticabal - SP">Rota no Google Maps</a>
+          <a class="btn btn--ghost" target="_blank" rel="noopener" data-rota="waze" data-end="Rua Coronel Odilon Ortiz, 60, Nova Jaboticabal, Jaboticabal - SP">Abrir no Waze</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="foot" id="contato">
+  <div class="wrap">
+    <div class="grid">
+      <div class="logo-big"><img src="img/logo.png" alt="Logo Buffet Ize" width="538" height="464">
+        <p style="margin-top:10px">Buffet, restaurante e rotisseria.<br>Empresa familiar desde 1995.</p></div>
+      <div><h4>Pedidos e eventos</h4><ul><li>WhatsApp (16) 3204-3321</li><li>Fim de ano (16) 3202-3260</li><li>Instagram <a href="https://www.instagram.com/buffetize_/" target="_blank" rel="noopener">@buffetize_</a></li></ul></div>
+      <div><h4>Restaurante</h4><ul><li>Rua Francisco Ferrari, 171, Jd. Morumbi</li><li>Todos os dias, 11h às 14h</li></ul><h4 style="margin-top:18px">Escritório comercial</h4><ul><li>Rua Cel. Odilon Ortiz, 60, Nova Jaboticabal</li><li>Jaboticabal, SP</li></ul><h4 style="margin-top:18px">Marmitas</h4><ul><li>Segunda a sábado: todas</li><li>Domingos e feriados: individuais</li><li>Taxa de entrega R$ 8,00</li></ul></div>
+      <div><h4>Pagamento</h4><ul><li>Crédito e débito</li><li>Dinheiro</li><li>PIX: CNPJ 40.360.468/0001-01</li></ul></div>
+    </div>
+    <div class="copy-line"><span>© <span id="ano">2026</span> Buffet Ize · CNPJ 40.360.468/0001-01</span><span>Fotos ilustrativas</span></div>
+  </div>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg><use href="#wa"/></svg></a>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO: edite aqui números, preços e cardápio
+   ============================================================ */
+const WA_PRINCIPAL = "551632043321";   // (16) 3204-3321
+const WA_FIM_ANO   = "551632023260";   // (16) 3202-3260
+const TAXA_ENTREGA = 8;
+const PRECO_EMBALAGEM = 5;
+const PRECO_SALADA = 4;
+
+const FOTOS = [
+  {src:"img/casamento.jpg",        alt:"Noivos com alianças e buquê", tag:"Casamentos"},
+  {src:"img/mesa-casamento.jpg",   alt:"Mesa posta com flores",       tag:"Recepções"},
+  {src:"img/buffet.jpg",           alt:"Buffet com travessas",        tag:"Buffet completo"},
+  {src:"img/coquetel.jpg",         alt:"Drinques no balcão",          tag:"Coquetéis"},
+  {src:"img/coffee-break.jpg",     alt:"Mesa de coffee break",        tag:"Coffee break"},
+  {src:"img/confraternizacao.jpg", alt:"Confraternização à mesa",     tag:"Confraternizações"},
+  {src:"img/jantar.jpg",           alt:"Mesa de jantar decorada",     tag:"Jantares"},
+];
+
+// Linha do tempo (edite os textos; o "Hoje" e os anos de casa são calculados sozinhos)
+const FUNDACAO = 1995;
+const LINHA_DO_TEMPO = [
+  {ano:1995, titulo:"O começo", texto:"Nasce o Buffet Ize, uma empresa da família, com receitas caseiras e atendimento próximo."},
+  {ano:2005, titulo:"10 anos", texto:"Uma década servindo casamentos, festas e confraternizações."},
+  {ano:2015, titulo:"20 anos", texto:"Buffet, restaurante e rotisseria: a comida da família no dia a dia da cidade."},
+  {ano:2025, titulo:"30 anos", texto:"Três décadas de receitas passadas de geração em geração."},
+];
+
+// Tamanhos e preços (a partir de 01/12/2026)
+// foto = caminho da foto da marmita (ex.: "img/marmitas/i20.jpg"); vazio = sem foto
+// carnes = quantas carnes escolher; mista = exige 1 branca + 1 vermelha; base = escolhe arroz/feijão/massa
+const MARMITAS = [
+  {id:"i20",  grupo:"Individuais", preco:20,  individual:true, carnes:1, salada:false, base:true, foto:"img/marmitas/i20.jpg", desc:"500 ml: arroz, feijão ou massa, 1 carne e 1 acompanhamento"},
+  {id:"i28",  grupo:"Individuais", preco:28,  individual:true, carnes:2, salada:false, base:true, foto:"img/marmitas/i28.jpg", desc:"800 ml: arroz, feijão ou massa, 2 carnes e 1 acompanhamento"},
+  {id:"i32",  grupo:"Individuais", preco:32,  individual:true, carnes:2, salada:true,  base:true, foto:"img/marmitas/i32.jpg", desc:"800 ml: arroz, feijão ou massa, 2 carnes, 1 acompanhamento e salada"},
+  {id:"f68",  grupo:"2 a 3 pessoas", preco:68,  carnes:2, salada:true, base:true,  foto:"img/marmitas/f68.jpg",  desc:"1 arroz, feijão ou massa (pote 500 ml), 2 carnes, 1 acompanhamento e 1 salada"},
+  {id:"f72",  grupo:"2 a 3 pessoas", preco:72,  carnes:2, salada:true, base:false, foto:"img/marmitas/f72.jpg",  desc:"Somente mistura (sem arroz, feijão ou massa): 2 carnes, 1 acompanhamento e 1 salada. Vem em 2 potes redondos de 800 ml e 1 hamburgueira"},
+  {id:"f75",  grupo:"2 a 3 pessoas", preco:75,  carnes:2, salada:true, base:true,  foto:"img/marmitas/f75.jpg",  desc:"1 arroz, 1 feijão ou massa, 2 carnes, 1 acompanhamento e 1 salada"},
+  {id:"g88",  grupo:"4 a 5 pessoas", preco:88,  carnes:1, salada:true, base:true,  foto:"img/marmitas/g88.jpg",  desc:"1 arroz, 1 feijão ou massa, 1 carne, 1 acompanhamento e 1 salada"},
+  {id:"g110", grupo:"4 a 5 pessoas", preco:110, carnes:2, salada:true, base:true,  foto:"img/marmitas/g110.jpg", desc:"1 arroz, 1 feijão ou massa, 2 carnes, 1 acompanhamento e 1 salada"},
+  {id:"x160", grupo:"Até 7 pessoas", preco:160, carnes:3, salada:true, base:true,  foto:"img/marmitas/x160.jpg", desc:"2 arroz, 1 feijão ou massa, 3 carnes, 1 acompanhamento e 1 salada"},
+];
+
+// Cardápio do dia: vem do arquivo cardapio.json (atualizado diariamente).
+// Se o arquivo não carregar, usa este cardápio de reserva.
+let CARDAPIO = {
+  exemplo: true,
+  bases: ["Arroz", "Feijão", "Massa"],
+  carnes: [
+    {nome:"Frango assado", tipo:"branca"},
+    {nome:"Carne de panela", tipo:"vermelha"},
+  ],
+  acompanhamentos: ["Farofa", "Legumes refogados"],
+  saladas: ["Salada verde"],
+};
+
+// Feriados municipais ou extras (AAAA-MM-DD). Os nacionais já são calculados.
+// Dias em que o restaurante NÃO abre (AAAA-MM-DD). Nesses dias os pedidos de marmita ficam desabilitados.
+const DIAS_FECHADOS = [
+  // {data:"2026-12-25", motivo:"Natal"},
+];
+const HORA_ABRE = "11:00", HORA_FECHA = "14:00";
+
+const FERIADOS_EXTRAS = [
+  // {data:"2026-08-15", nome:"Feriado municipal"},
+];
+
+/* ============================================================ */
+const $ = s => document.querySelector(s);
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const waLink = (num, txt) => `https://wa.me/${num}?text=${encodeURIComponent(txt)}`;
+const pad = n => String(n).padStart(2,"0");
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const fromIso = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); };
+const dataBr = d => d.toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"});
+
+// Links fixos de WhatsApp
+$("#fab").href = waLink(WA_PRINCIPAL, "Olá, Buffet Ize! Vim pelo site.");
+$("#waKilo").href = waLink(WA_PRINCIPAL, "Olá, Buffet Ize! Gostaria de fazer uma encomenda avulsa (por quilo).");
+$("#waFimHero").href = waLink(WA_FIM_ANO, "Olá, Buffet Ize! Gostaria de fazer uma encomenda de fim de ano.");
+$("#waFim").href = waLink(WA_FIM_ANO, "Olá, Buffet Ize! Gostaria de fazer uma encomenda de fim de ano.");
+$("#ano").textContent = new Date().getFullYear();
+
+// Menu mobile
+$("#menuBtn").addEventListener("click", () => {
+  const open = $("#nav").classList.toggle("open");
+  $("#menuBtn").setAttribute("aria-expanded", open);
+});
+$("#nav").addEventListener("click", e => { if (e.target.closest("a")) { $("#nav").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", false); } });
+
+/* ---------- Carrossel ---------- */
+(() => {
+  const box = $("#slides"), dots = $("#dots");
+  FOTOS.forEach((f,i) => {
+    const s = document.createElement("div");
+    s.className = "slide" + (i===0 ? " on" : "");
+    s.innerHTML = `<img src="${f.src}" alt="${f.alt}" ${i? 'loading="lazy"':''}>`;
+    box.appendChild(s);
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("aria-label", `Foto ${i+1}: ${f.tag}`);
+    b.addEventListener("click", () => { go(i); restart(); });
+    dots.appendChild(b);
+  });
+  let cur = 0, timer;
+  function go(i){
+    cur = (i + FOTOS.length) % FOTOS.length;
+    box.querySelectorAll(".slide").forEach((s,k) => s.classList.toggle("on", k===cur));
+    dots.querySelectorAll("button").forEach((b,k) => b.classList.toggle("on", k===cur));
+    $("#slideTag").textContent = FOTOS[cur].tag;
+  }
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function restart(){ clearInterval(timer); if (!reduce) timer = setInterval(() => go(cur+1), 5500); }
+  $("#prev").addEventListener("click", () => { go(cur-1); restart(); });
+  $("#next").addEventListener("click", () => { go(cur+1); restart(); });
+  go(0); restart();
+})();
+
+/* ---------- Envio pelo WhatsApp ---------- */
+function enviar(num, texto, alvo){
+  const url = waLink(num, texto);
+  let w = null;
+  try { w = window.open(url, "_blank", "noopener"); } catch(e) {}
+  alvo.innerHTML = `<div class="sent">
+    <b>${w ? "Abrimos o WhatsApp com a sua mensagem." : "Sua mensagem está pronta."}</b>
+    <span>Se o WhatsApp não abriu, toque no botão abaixo e confirme o envio por lá.</span>
+    <pre></pre>
+    <div class="acts"><a class="btn btn--wa" target="_blank" rel="noopener" href="${url}"><svg><use href="#wa"/></svg>Abrir WhatsApp</a></div>
+  </div>`;
+  alvo.querySelector("pre").textContent = texto;
+}
+
+/* ---------- Orçamento ---------- */
+$("#oData").min = iso(new Date());
+$("#fOrc").addEventListener("submit", e => {
+  e.preventDefault();
+  const v = id => $(id).value.trim();
+  const falta = [["#oNome","nome"],["#oTel","telefone"],["#oTipo","tipo de evento"],["#oQtd","quantidade de convidados"],["#oData","data prevista"]].filter(([id]) => !v(id)).map(([,n]) => n);
+  if (falta.length){ $("#oErr").textContent = "Preencha: " + falta.join(", ") + "."; return; }
+  $("#oErr").textContent = "";
+  const texto = `*Solicitação de orçamento – Buffet Ize*\n\n*Nome:* ${v("#oNome")}\n*Telefone:* ${v("#oTel")}\n*Tipo de evento:* ${v("#oTipo")}\n*Convidados:* ${v("#oQtd")}\n*Data prevista:* ${fromIso(v("#oData")).toLocaleDateString("pt-BR")}`;
+  enviar(WA_PRINCIPAL, texto, $("#oSent"));
+});
+
+/* ---------- Feriados ---------- */
+function pascoa(y){
+  const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),
+    h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),
+    mes=Math.floor((h+l-7*m+114)/31),dia=((h+l-7*m+114)%31)+1;
+  return new Date(y,mes-1,dia);
+}
+function feriado(d){
+  const y = d.getFullYear(), md = `${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const fixos = {"01-01":"Confraternização Universal","04-21":"Tiradentes","05-01":"Dia do Trabalho","09-07":"Independência",
+    "07-09":"Revolução Constitucionalista (SP)","10-12":"Nossa Senhora Aparecida","11-02":"Finados","11-15":"Proclamação da República","11-20":"Consciência Negra","12-25":"Natal"};
+  if (fixos[md]) return fixos[md];
+  const p = pascoa(y), add = n => iso(new Date(p.getFullYear(), p.getMonth(), p.getDate()+n));
+  if (iso(d) === add(-2)) return "Sexta-feira Santa";
+  if (iso(d) === add(60)) return "Corpus Christi";
+  const ex = FERIADOS_EXTRAS.find(f => f.data === iso(d));
+  return ex ? ex.nome : null;
+}
+
+/* ---------- Marmitas ---------- */
+const st = { size:null, qtd:1, emb:0, sal:0, cart:[], restrito:false };
+let diaSel = new Date();
+
+function avaliarDia(){
+  const fer = feriado(diaSel), dom = diaSel.getDay() === 0;
+  st.restrito = dom || !!fer;
+  const fech = DIAS_FECHADOS.find(f => f.data === iso(diaSel));
+  st.fechado = !!fech;
+  const info = $("#dayInfo");
+  const nome = dataBr(diaSel);
+  info.className = "dayinfo" + (st.restrito || st.fechado ? " restrict" : "");
+  info.textContent = st.fechado
+    ? `${nome[0].toUpperCase()+nome.slice(1)}${fech.motivo ? " · " + fech.motivo : ""}: fechado, não recebemos pedidos neste dia`
+    : st.restrito
+    ? `${nome[0].toUpperCase()+nome.slice(1)}${fer ? " · " + fer : ""}: apenas marmitas individuais`
+    : `${nome[0].toUpperCase()+nome.slice(1)}: todas as marmitas disponíveis`;
+  document.querySelectorAll(".size").forEach(l => {
+    const m = MARMITAS.find(x => x.id === l.dataset.id);
+    const off = st.fechado || (st.restrito && !m.individual);
+    l.classList.toggle("off", off);
+    l.querySelector("input").disabled = off;
+    if (off && st.size === m.id){ l.querySelector("input").checked = false; st.size = null; renderOpts(); }
+  });
+  renderCart();
+}
+
+function renderSizes(){
+  const grupos = [...new Set(MARMITAS.map(m => m.grupo))];
+  $("#sizes").innerHTML = grupos.map(g => `
+    <div class="grp">
+      <div class="grp-t"><h4>${g}</h4><span>${g === "Individuais" ? "todos os dias" : "segunda a sábado"}</span></div>
+      <div class="sizes">${MARMITAS.filter(m => m.grupo===g).map(m => `
+        <label class="size" data-id="${m.id}">
+          <input type="radio" name="size" value="${m.id}" id="sz-${m.id}">
+          ${m.foto ? `<img class="thumb" src="${m.foto}" alt="" loading="lazy">` : ""}<span class="p">${brl(m.preco)}</span><span class="d">${m.desc}</span>
+        </label>`).join("")}</div>
+    </div>`).join("");
+  $("#sizes").addEventListener("change", e => { st.size = e.target.value; renderOpts(); });
+}
+
+function chip(type, name, value, label, checked, extra=""){
+  const id = `${name}-${value}`.replace(/\W+/g,"-");
+  return `<label class="chip"><input type="${type}" name="${name}" value="${value}" id="${id}" ${checked?"checked":""}> ${label}${extra}</label>`;
+}
+
+function renderOpts(){
+  const m = MARMITAS.find(x => x.id === st.size);
+  $("#addErr").textContent = "";
+  const fig = $("#mmFoto");
+  fig.hidden = !(m && m.foto);
+  if (m && m.foto){
+    fig.querySelector("img").src = m.foto;
+    fig.querySelector("img").alt = "Foto da marmita: " + m.desc;
+    fig.querySelector("figcaption").innerHTML = `<b>${brl(m.preco)}</b><span>${m.grupo}</span><span>${m.desc}</span>`;
+  }
+  if (!m){ $("#opts").innerHTML = `<p class="hint">Escolha um tamanho no passo 2 para ver as opções.</p>`; updLine(); return; }
+  let h = "";
+  if (m.base) h += `<fieldset class="optset"><legend class="legend">Base · escolha pelo menos uma</legend><div class="chips">${
+    CARDAPIO.bases.map(b => chip("checkbox","base",b,b,(CARDAPIO.basesPadrao || ["Arroz","Feijão"]).includes(b))).join("")}</div></fieldset>`;
+  const regra = m.mista ? "1 carne branca e 1 vermelha" : (m.carnes === 1 ? "escolha 1" : `escolha até ${m.carnes}`);
+  h += `<fieldset class="optset"><legend class="legend">Carnes · ${regra}</legend><div class="chips">${
+    CARDAPIO.carnes.map(c => chip(m.carnes===1?"radio":"checkbox","carne",c.nome,c.nome,false,` <small>${c.tipo}</small>`)).join("")}</div></fieldset>`;
+  h += `<fieldset class="optset"><legend class="legend">Acompanhamento · escolha 1</legend><div class="chips">${
+    CARDAPIO.acompanhamentos.map(a => chip("radio","acomp",a,a,false)).join("")}</div></fieldset>`;
+  if (m.salada) h += `<fieldset class="optset"><legend class="legend">Salada · escolha 1</legend><div class="chips">${
+    CARDAPIO.saladas.map(s => chip("radio","salada",s,s,false)).join("")}</div></fieldset>`;
+  $("#opts").innerHTML = h;
+  limitarCarnes();
+  updLine();
+}
+
+function limitarCarnes(){
+  const m = MARMITAS.find(x => x.id === st.size);
+  if (!m || m.carnes === 1) return;
+  const boxes = [...document.querySelectorAll('input[name="carne"]')];
+  const sel = boxes.filter(b => b.checked);
+  boxes.forEach(b => {
+    if (b.checked) { b.disabled = false; return; }
+    let dis = sel.length >= m.carnes;
+    if (m.mista && !dis){
+      const tipo = CARDAPIO.carnes.find(c => c.nome === b.value).tipo;
+      dis = sel.some(s => CARDAPIO.carnes.find(c => c.nome === s.value).tipo === tipo);
+    }
+    b.disabled = dis;
+  });
+}
+$("#opts").addEventListener("change", e => { if (e.target.name === "carne") limitarCarnes(); $("#addErr").textContent = ""; });
+
+document.querySelectorAll("[data-q]").forEach(b => b.addEventListener("click", () => {
+  const k = b.dataset.q, min = k === "qtd" ? 1 : 0;
+  st[k] = Math.max(min, Math.min(50, st[k] + Number(b.dataset.d)));
+  $("#" + k).textContent = st[k];
+  if (k === "sal") renderSalExtra();
+  updLine();
+}));
+
+// Escolha das saladas adicionais (uma escolha para cada salada extra)
+function renderSalExtra(){
+  const box = $("#salExtra");
+  const atuais = [...box.querySelectorAll("select")].map(s => s.value);
+  box.hidden = st.sal === 0;
+  box.innerHTML = st.sal ? `<fieldset class="optset"><legend class="legend">Saladas adicionais · escolha ${st.sal === 1 ? "a salada" : "cada uma"}</legend>
+    <div class="row">${Array.from({length:st.sal}, (_,i) => `
+      <div class="field"><label for="salx-${i}">Salada adicional ${i+1}</label>
+        <select id="salx-${i}"><option value="">Escolha…</option>${CARDAPIO.saladas.map(s => `<option ${atuais[i]===s?"selected":""}>${s}</option>`).join("")}</select>
+      </div>`).join("")}</div></fieldset>` : "";
+}
+$("#salExtra").addEventListener("change", () => $("#addErr").textContent = "");
+
+function precoLinha(m, qtd, emb, sal){ return m.preco*qtd + emb*PRECO_EMBALAGEM + sal*PRECO_SALADA; }
+function updLine(){
+  const m = MARMITAS.find(x => x.id === st.size);
+  $("#lineTot").textContent = m ? brl(precoLinha(m, st.qtd, st.emb, st.sal)) : "Escolha um tamanho";
+  $("#addBtn").disabled = !m;
+}
+
+$("#addBtn").addEventListener("click", () => {
+  const m = MARMITAS.find(x => x.id === st.size);
+  if (!m) return;
+  const vals = n => [...document.querySelectorAll(`input[name="${n}"]:checked`)].map(i => i.value);
+  const bases = m.base ? vals("base") : [], carnes = vals("carne"), acomp = vals("acomp")[0], salada = vals("salada")[0];
+  let erro = "";
+  if (m.base && !bases.length) erro = "Escolha pelo menos um item base (arroz, feijão ou massa).";
+  else if (!carnes.length) erro = "Escolha a carne.";
+  else if (m.mista && carnes.length < 2) erro = "Escolha 1 carne branca e 1 carne vermelha.";
+  else if (!acomp) erro = "Escolha o acompanhamento.";
+  else if (m.salada && !salada) erro = "Escolha a salada.";
+  const salExtras = [...document.querySelectorAll("#salExtra select")].map(s => s.value);
+  if (!erro && salExtras.some(v => !v)) erro = "Escolha qual salada você quer em cada salada adicional.";
+  if (erro){ $("#addErr").textContent = erro; return; }
+  st.cart.push({ m, bases, carnes, acomp, salada, salExtras, qtd:st.qtd, emb:st.emb, sal:st.sal });
+  // limpa para a próxima
+  st.qtd = 1; st.emb = 0; st.sal = 0; ["qtd","emb","sal"].forEach(k => $("#"+k).textContent = st[k]);
+  renderSalExtra();
+  renderOpts(); renderCart();
+  $("#pSent").innerHTML = "";
+});
+
+function detalhe(it){
+  const p = [];
+  if (it.bases.length) p.push(it.bases.join(", "));
+  p.push(it.carnes.join(", "), it.acomp);
+  if (it.salada) p.push(it.salada);
+  const ex = [];
+  if (it.emb) ex.push(`+${it.emb} embalagem adicional`);
+  if (it.sal) ex.push(`+${it.sal} salada adicional (${it.salExtras.join(", ")})`);
+  return p.join(" · ") + (ex.length ? " · " + ex.join(", ") : "");
+}
+
+function totais(){
+  const sub = st.cart.reduce((s,it) => s + precoLinha(it.m, it.qtd, it.emb, it.sal), 0);
+  const ent = document.querySelector('input[name="modo"]:checked').value === "entrega" ? TAXA_ENTREGA : 0;
+  return { sub, ent, tot: sub + (st.cart.length ? ent : 0) };
+}
+
+function renderCart(){
+  const ol = $("#cartList");
+  ol.innerHTML = st.cart.map((it,i) => `
+    <li class="${st.restrito && !it.m.individual ? "bad" : ""}">
+      <b>${it.qtd}× ${it.m.grupo === "Individuais" ? "Individual" : it.m.grupo} ${brl(it.m.preco)}</b>
+      <span class="v">${brl(precoLinha(it.m, it.qtd, it.emb, it.sal))}</span>
+      <span class="s">${detalhe(it)}</span>
+      <button type="button" class="rm" data-i="${i}">remover</button>
+    </li>`).join("");
+  $("#cartEmpty").hidden = st.cart.length > 0;
+  const t = totais();
+  $("#tSub").textContent = brl(t.sub);
+  $("#tEnt").textContent = t.ent ? brl(t.ent) : "Retirada";
+  $("#tTot").textContent = brl(t.tot);
+}
+$("#cartList").addEventListener("click", e => {
+  const b = e.target.closest(".rm"); if (!b) return;
+  st.cart.splice(Number(b.dataset.i), 1); renderCart();
+});
+
+// Dados de envio
+function updModo(){
+  const ent = $("#mEnt").checked;
+  $("#endWrap").hidden = !ent;
+  renderCart();
+}
+document.querySelectorAll('input[name="modo"]').forEach(r => r.addEventListener("change", updModo));
+document.querySelectorAll('input[name="pag"]').forEach(r => r.addEventListener("change", () => {
+  const v = document.querySelector('input[name="pag"]:checked').value;
+  $("#trocoWrap").hidden = v !== "Dinheiro";
+  $("#pixWrap").hidden = v !== "PIX";
+}));
+$("#pixCopy").addEventListener("click", () => {
+  const key = $("#pixKey").textContent;
+  const ok = () => { $("#pixCopy").textContent = "Chave copiada"; setTimeout(() => $("#pixCopy").textContent = "Copiar chave", 2000); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents($("#pixKey")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("#pixCopy").textContent = "Selecionada: copie com Ctrl+C"; };
+  try { navigator.clipboard.writeText(key).then(ok, fallback); } catch(e) { fallback(); }
+});
+
+$("#fPed").addEventListener("submit", e => {
+  e.preventDefault();
+  const err = $("#pErr");
+  const v = id => $(id).value.trim();
+  const ent = $("#mEnt").checked;
+  const pag = document.querySelector('input[name="pag"]:checked');
+  let msg = "";
+  if (!st.cart.length) msg = "Adicione pelo menos uma marmita ao pedido.";
+  else if (st.fechado) msg = "Estaremos fechados neste dia. Escolha outra data para o pedido.";
+  else if (st.restrito && st.cart.some(it => !it.m.individual)) msg = "Neste dia só servimos marmitas individuais. Remova as outras ou mude a data.";
+  else if (!v("#pNome")) msg = "Informe seu nome e sobrenome.";
+  else if (ent && !v("#pEnd")) msg = "Informe o endereço de entrega.";
+  else if (!v("#pHora")) msg = "Informe o horário.";
+  else if (v("#pHora") < HORA_ABRE || v("#pHora") > HORA_FECHA) msg = "Atendemos das 11h às 14h. Escolha um horário nesse intervalo.";
+  else if (!pag) msg = "Escolha a forma de pagamento.";
+  err.textContent = msg;
+  if (msg) return;
+  const t = totais();
+  const linhas = st.cart.map((it,i) => `${i+1}) ${it.qtd}x ${it.m.grupo === "Individuais" ? "Individual" : "Marmita " + it.m.grupo} ${brl(it.m.preco)}\n   ${detalhe(it)}\n   Subtotal: ${brl(precoLinha(it.m, it.qtd, it.emb, it.sal))}`).join("\n");
+  let pagTxt = pag.value;
+  if (pag.value === "Dinheiro") pagTxt += v("#pTroco") ? ` (troco: ${v("#pTroco")})` : " (sem troco)";
+  if (pag.value === "PIX") pagTxt += " (envio o comprovante em seguida)";
+  const texto =
+`*Pedido de marmitas – Buffet Ize*
+*Data:* ${dataBr(diaSel)}
+
+${linhas}
+
+*${ent ? "Entrega" : "Retirada no local"}*${ent ? `\n*Endereço:* ${v("#pEnd")}` : ""}
+*Horário:* ${v("#pHora")}
+*Pagamento:* ${pagTxt}
+
+Marmitas: ${brl(t.sub)}${ent ? `\nTaxa de entrega: ${brl(t.ent)}` : ""}
+*Total: ${brl(t.tot)}*
+
+*Nome:* ${v("#pNome")}${v("#pObs") ? `\n*Informações adicionais:* ${v("#pObs")}` : ""}`;
+  enviar(WA_PRINCIPAL, texto, $("#pSent"));
+});
+
+// Linha do tempo
+(() => {
+  const hoje = new Date().getFullYear(), anos = hoje - FUNDACAO;
+  document.querySelectorAll(".anos-n").forEach(e => e.textContent = anos);
+  const itens = LINHA_DO_TEMPO.filter(i => i.ano < hoje).concat([{ano:hoje, titulo:`Hoje, ${anos} anos`, texto:"Seguimos com a mesma tradição e qualidade, agora também com pedidos pelo site.", now:true}]);
+  $("#timeline").innerHTML = itens.map(i => `<li class="${i.now ? "now" : ""}"><span class="y">${i.ano}</span><div class="c"><b>${i.titulo}</b><span>${i.texto}</span></div></li>`).join("");
+})();
+
+// Restaurante: preço de hoje
+(() => {
+  const d = new Date(), fer = feriado(d), dow = d.getDay();
+  const fech = DIAS_FECHADOS.find(f => f.data === iso(d));
+  const box = $("#hoje");
+  const nome = dataBr(d); const Nome = nome[0].toUpperCase() + nome.slice(1);
+  if (fech){ box.classList.add("closed"); box.innerHTML = `<b>Hoje: fechado</b><span>${Nome}${fech.motivo ? " · " + fech.motivo : ""}</span>`; return; }
+  const k = dow === 0 ? "domingo" : (dow === 6 || fer) ? "sabfer" : "semana";
+  const semana = k === "semana";
+  document.querySelector(`.pgroup [data-k="${k}"]`).classList.add("on");
+  ["pf","av"].forEach(x => document.querySelector(`.pgroup [data-k="${x}"]`).classList.toggle(semana ? "on" : "na", true));
+  const preco = {semana:"R$ 84,90", sabfer:"R$ 98,90", domingo:"R$ 101,90"}[k];
+  box.innerHTML = `<b>Hoje, ${Nome}${fer ? " (" + fer + ")" : ""}</b><span>Self-service ${preco}/kg${semana ? " · prato feito R$ 40,00 · à vontade R$ 70,00" : " · prato feito e à vontade só de segunda a sexta"}</span>`;
+})();
+
+// Links de rota
+document.querySelectorAll("[data-rota]").forEach(a => {
+  const end = encodeURIComponent(a.dataset.end);
+  a.href = a.dataset.rota === "waze"
+    ? `https://waze.com/ul?q=${end}&navigate=yes`
+    : `https://www.google.com/maps/dir/?api=1&destination=${end}`;
+});
+
+// Início
+function aplicarCardapio(){
+  const n = $("#menuNote");
+  n.hidden = !CARDAPIO.exemplo && !CARDAPIO.atualizado;
+  n.textContent = CARDAPIO.exemplo
+    ? "Cardápio de exemplo. Será trocado pelo cardápio oficial do Buffet Ize."
+    : `Cardápio atualizado em ${CARDAPIO.atualizado}.`;
+  n.style.cssText = CARDAPIO.exemplo ? "" : "background:var(--sand);color:var(--choc-2)";
+  renderOpts(); renderSalExtra();
+}
+fetch("cardapio.json", {cache:"no-store"})
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(d => { CARDAPIO = d; aplicarCardapio(); })
+  .catch(() => aplicarCardapio());
+const dIn = $("#mData");
+dIn.value = iso(diaSel); dIn.min = iso(new Date());
+dIn.addEventListener("change", () => { if (dIn.value){ diaSel = fromIso(dIn.value); avaliarDia(); } });
+renderSizes(); renderOpts(); updModo(); avaliarDia();
+</script>
+
+</body>
+</html>

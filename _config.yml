@@ -1,0 +1,5 @@
+# GitHub Pages: publica o site como está; estes arquivos de trabalho não vão ao ar
+exclude:
+  - CLAUDE.md
+  - fonte
+  - README.md

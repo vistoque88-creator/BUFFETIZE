@@ -1,0 +1,32 @@
+{
+  "atualizado": "21/11/2026 (sábado)",
+  "exemplo": false,
+  "bases": [
+    "Arroz branco",
+    "Arroz integral",
+    "Feijão carioca",
+    "Macarrão parisiense"
+  ],
+  "basesPadrao": [
+    "Arroz branco",
+    "Feijão carioca"
+  ],
+  "carnes": [
+    {
+      "nome": "Bife de fraldinha grelhado",
+      "tipo": "vermelha"
+    },
+    {
+      "nome": "Frango desossado assado",
+      "tipo": "branca"
+    }
+  ],
+  "acompanhamentos": [
+    "Batatas sotê",
+    "Farofa Ize"
+  ],
+  "saladas": [
+    "Folhas",
+    "Farofa fria"
+  ]
+}
