@@ -72,6 +72,14 @@ Todos os formulários montam a mensagem e abrem `https://wa.me/<num>?text=...`.
 - Embalagem adicional R$5; salada adicional R$4 (cliente escolhe o sabor de cada salada extra).
 - Obrigatório escolher ao menos 1 item base (arroz/feijão/massa), exceto "somente mistura".
 - Segunda a sábado: todas. **Domingos e feriados: só individuais** (calendário automático).
+- **Horário para fazer pedidos (Brasília, `HORARIO_PEDIDOS`):** seg–sáb 8h–13h30; domingos e feriados 8h–13h.
+  Fora disso a área de pedidos fica bloqueada (marmitas e bebidas) com aviso. Pedidos só para o próprio dia
+  (o seletor de data foi removido em 23/11). Hora calculada em America/Sao_Paulo, não no relógio do aparelho.
+- **Bebidas (`BEBIDAS`, passo 4):** suco natural 300 ml R$8 (laranja; laranja e morango; laranja, abacaxi e hortelã;
+  verde detox; acerola); refrigerante lata R$8 (Coca-Cola, Coca Zero, Guaraná Antarctica, Guaraná Zero, Sprite,
+  Fanta Laranja, Fanta Uva, água tônica, tônica zero); água com/sem gás R$5; refrigerante 600 ml R$10 e 2 L R$16
+  (Coca, Coca Zero, Guaraná, Guaraná Zero); H2O limão/limoneto R$9; Jaboti 250 ml R$3; Jaboti 2 L R$8.
+  Outras bebidas: cliente escreve em "Informações adicionais". Pedido exige ao menos 1 marmita.
 - Entrega R$8 (endereço obrigatório) ou retirada. Horário entre 11h e 14h.
 - Pagamento: crédito, débito, dinheiro (pergunta troco), PIX chave CNPJ **40.360.468/0001-01** (pedir comprovante).
 - Cada tamanho aceita `foto` (caminho em `img/marmitas/`); aparece no cartão e no passo 3 quando selecionada.

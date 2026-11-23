@@ -284,6 +284,24 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
 .size .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;margin-bottom:6px}
 .placeholder-note{font-size:.85rem;color:#7a3416;background:#fbeee2;border-radius:var(--radius);padding:8px 12px}
 
+/* Horário de pedidos */
+.ped-status{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;border-radius:var(--radius);padding:14px 18px;margin-bottom:22px;border:1px solid #bcd6c1;background:#eef5ef;color:#1f3d27}
+.ped-status b{font-weight:600}
+.ped-status.off{border-color:#e7b9a3;background:#fbeee2;color:#7a3416}
+.mm.off #mmPassos{opacity:.45;filter:grayscale(.4)}
+/* Bebidas */
+.bebs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.beb{display:grid;gap:8px;align-content:start;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ivory)}
+.beb-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.beb-t b{font-weight:500;line-height:1.3}
+.beb-t span{font-family:var(--f-display);font-size:1.3rem;font-weight:700;color:var(--choc);white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
+.beb select{padding:9px 12px;font-size:.95rem}
+.beb-a{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.beb-a .add{border:0;border-radius:999px;background:var(--choc);color:var(--ivory);font:500 .9rem var(--f-body);padding:9px 16px;cursor:pointer}
+.beb-a .add:hover{background:var(--choc-2)}
+.beb.ok{border-color:var(--ok)}
+.cart li.bebl b{font-weight:400}
+
 /* Carrinho */
 .cart{position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px);background:var(--choc);color:var(--ivory);border-radius:var(--radius);padding:24px;display:grid;gap:16px}
 @media (max-width:980px){.cart{position:static}}
@@ -544,20 +562,21 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
       <div class="sec-head" style="margin-bottom:0">
         <span class="eyebrow">Marmitas</span>
         <h2>Monte sua marmita</h2>
-        <p>Escolha o dia, o tamanho e os itens do cardápio. O pedido chega pronto no nosso WhatsApp.</p>
+        <p>Escolha o tamanho, os itens do cardápio do dia e as bebidas. O pedido chega pronto no nosso WhatsApp.</p>
       </div>
       <span class="notice">Valores válidos a partir de 01/12/2026</span>
     </div>
 
-    <div class="mm">
-      <div>
+    <div class="ped-status" id="pedStatus" role="status"></div>
+
+    <div class="mm" id="mmArea">
+      <div id="mmPassos">
         <div class="step">
-          <div class="step-h"><span class="n">1</span><h3>Dia do pedido</h3></div>
+          <div class="step-h"><span class="n">1</span><h3>Pedido para hoje</h3></div>
           <div class="daybox">
-            <input type="date" id="mData" aria-label="Data do pedido">
             <span class="dayinfo" id="dayInfo"></span>
           </div>
-          <p class="hint">De segunda a sábado servimos todas as marmitas. Domingos e feriados, apenas as individuais.</p>
+          <p class="hint">Pedidos de segunda a sábado das 8h às 13h30, e aos domingos e feriados das 8h às 13h. De segunda a sábado servimos todas as marmitas; domingos e feriados, apenas as individuais.</p>
         </div>
 
         <div class="step">
@@ -583,8 +602,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
           </div>
         </div>
 
+        <div class="step" id="stepBeb">
+          <div class="step-h"><span class="n">4</span><h3>Bebidas</h3></div>
+          <p class="hint">Opcional. Escolha o sabor, a quantidade e toque em “Adicionar”. Outras bebidas: escreva em “Informações adicionais”, no passo 5.</p>
+          <div class="bebs" id="bebs"></div>
+        </div>
+
         <form class="step form" id="fPed" novalidate>
-          <div class="step-h"><span class="n">4</span><h3>Dados para envio</h3></div>
+          <div class="step-h"><span class="n">5</span><h3>Dados para envio</h3></div>
           <div class="field"><label for="pNome">Nome e sobrenome</label><input id="pNome" autocomplete="name" required></div>
           <fieldset class="optset">
             <legend class="legend">Como quer receber?</legend>
@@ -611,7 +636,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
             <button type="button" class="copy" id="pixCopy">Copiar chave</button>
             <span class="hint">Depois de pagar, envie o comprovante na mesma conversa do WhatsApp.</span>
           </div>
-          <div class="field"><label for="pObs">Informações adicionais</label><textarea id="pObs" placeholder="Ex.: sem cebola, troco, interfone, etc."></textarea></div>
+          <div class="field"><label for="pObs">Informações adicionais</label><textarea id="pObs" placeholder="Ex.: outras bebidas, sem cebola, interfone etc."></textarea></div>
         </form>
       </div>
 
@@ -621,11 +646,12 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
         <ol id="cartList"></ol>
         <div class="tot">
           <div><span>Marmitas</span><span id="tSub">R$ 0,00</span></div>
+          <div id="tBebRow" hidden><span>Bebidas</span><span id="tBeb">R$ 0,00</span></div>
           <div><span>Taxa de entrega</span><span id="tEnt">R$ 8,00</span></div>
           <div class="big"><span>Total</span><span id="tTot">R$ 0,00</span></div>
         </div>
         <p class="err" id="pErr" role="alert" style="color:#ffb59a"></p>
-        <button class="btn btn--wa" type="submit" form="fPed"><svg><use href="#wa"/></svg>Enviar pedido pelo WhatsApp</button>
+        <button class="btn btn--wa" type="submit" form="fPed" id="pEnviar"><svg><use href="#wa"/></svg>Enviar pedido pelo WhatsApp</button>
         <div id="pSent"></div>
       </aside>
     </div>
@@ -775,7 +801,25 @@ let CARDAPIO = {
 const DIAS_FECHADOS = [
   // {data:"2026-12-25", motivo:"Natal"},
 ];
-const HORA_ABRE = "11:00", HORA_FECHA = "14:00";
+const HORA_ABRE = "11:00", HORA_FECHA = "14:00";   // horário de entrega/retirada
+
+// Horário para FAZER pedidos de marmitas e bebidas (horário de Brasília)
+const HORARIO_PEDIDOS = {
+  semana:          {abre:"08:00", fecha:"13:30"},  // segunda a sábado
+  domingoFeriado:  {abre:"08:00", fecha:"13:00"},
+};
+
+// Bebidas (outras bebidas: cliente escreve em "Informações adicionais")
+const BEBIDAS = [
+  {id:"suco",   nome:"Suco natural 300 ml",   preco:8,  sabores:["Laranja","Laranja e morango","Laranja, abacaxi e hortelã","Verde detox","Acerola"]},
+  {id:"lata",   nome:"Refrigerante lata",     preco:8,  sabores:["Coca-Cola","Coca-Cola Zero","Guaraná Antarctica","Guaraná Antarctica Zero","Sprite","Fanta Laranja","Fanta Uva","Água tônica","Água tônica zero"]},
+  {id:"agua",   nome:"Água",                  preco:5,  sabores:["Sem gás","Com gás"]},
+  {id:"r600",   nome:"Refrigerante 600 ml",   preco:10, sabores:["Coca-Cola","Coca-Cola Zero","Guaraná Antarctica","Guaraná Antarctica Zero"]},
+  {id:"h2o",    nome:"H2O",                   preco:9,  sabores:["Limão","Limoneto"]},
+  {id:"r2l",    nome:"Refrigerante 2 litros", preco:16, sabores:["Coca-Cola","Coca-Cola Zero","Guaraná Antarctica","Guaraná Antarctica Zero"]},
+  {id:"jab250", nome:"Jaboti 250 ml",         preco:3},
+  {id:"jab2l",  nome:"Jaboti 2 litros",       preco:8},
+];
 
 const FERIADOS_EXTRAS = [
   // {data:"2026-08-15", nome:"Feriado municipal"},
@@ -877,8 +921,37 @@ function feriado(d){
 }
 
 /* ---------- Marmitas ---------- */
-const st = { size:null, qtd:1, emb:0, sal:0, cart:[], restrito:false };
+const st = { size:null, qtd:1, emb:0, sal:0, cart:[], bebidas:[], restrito:false, aberto:true };
 let diaSel = new Date();
+
+// Data e hora atuais em Brasília (não depende do relógio/fuso do aparelho do cliente)
+function agoraSP(){
+  const f = new Intl.DateTimeFormat("en-CA", {timeZone:"America/Sao_Paulo", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hourCycle:"h23"});
+  const o = {}; f.formatToParts(new Date()).forEach(x => o[x.type] = x.value);
+  return { dia: new Date(Number(o.year), Number(o.month)-1, Number(o.day)), hm: `${o.hour}:${o.minute}` };
+}
+const hmBr = hm => { const [h,m] = hm.split(":"); return m === "00" ? `${Number(h)}h` : `${Number(h)}h${m}`; };
+
+// Abre/fecha os pedidos conforme o horário
+function aplicarJanela(){
+  const a = agoraSP();
+  if (iso(a.dia) !== iso(diaSel)) { diaSel = a.dia; avaliarDia(); }
+  const domFer = a.dia.getDay() === 0 || !!feriado(a.dia);
+  const j = domFer ? HORARIO_PEDIDOS.domingoFeriado : HORARIO_PEDIDOS.semana;
+  const fech = DIAS_FECHADOS.find(f => f.data === iso(a.dia));
+  let msg;
+  if (fech) { st.aberto = false; msg = `<b>Hoje estamos fechados${fech.motivo ? " (" + fech.motivo + ")" : ""}.</b> Não recebemos pedidos de marmitas hoje.`; }
+  else if (a.hm < j.abre) { st.aberto = false; msg = `<b>Os pedidos de hoje abrem às ${hmBr(j.abre)}.</b> Recebemos pedidos até as ${hmBr(j.fecha)}.`; }
+  else if (a.hm > j.fecha) { st.aberto = false; msg = `<b>Pedidos de marmitas encerrados por hoje.</b> Volte amanhã a partir das 8h. Segunda a sábado: 8h às 13h30 · domingos e feriados: 8h às 13h.`; }
+  else { st.aberto = true; msg = `<b>Pedidos abertos hoje até as ${hmBr(j.fecha)}.</b>`; }
+  const box = $("#pedStatus");
+  box.className = "ped-status" + (st.aberto ? "" : " off");
+  box.innerHTML = msg;
+  $("#mmArea").classList.toggle("off", !st.aberto);
+  $("#mmPassos").inert = !st.aberto;
+  $("#pEnviar").disabled = !st.aberto;
+  return a;
+}
 
 function avaliarDia(){
   const fer = feriado(diaSel), dom = diaSel.getDay() === 0;
@@ -1026,10 +1099,43 @@ function detalhe(it){
   return p.join(" · ") + (ex.length ? " · " + ex.join(", ") : "");
 }
 
+function renderBebidas(){
+  $("#bebs").innerHTML = BEBIDAS.map(b => `
+    <div class="beb" data-id="${b.id}">
+      <div class="beb-t"><b>${b.nome}</b><span>${brl(b.preco)}</span></div>
+      ${b.sabores ? `<select id="beb-s-${b.id}" aria-label="Sabor de ${b.nome}"><option value="">Escolha o sabor…</option>${b.sabores.map(x => `<option>${x}</option>`).join("")}</select>` : ""}
+      <div class="beb-a">
+        <span class="qty"><span class="ctl"><button type="button" data-bq="-1" aria-label="Menos uma">−</button><output id="beb-q-${b.id}">1</output><button type="button" data-bq="1" aria-label="Mais uma">+</button></span></span>
+        <button type="button" class="add">Adicionar</button>
+      </div>
+    </div>`).join("");
+}
+$("#bebs").addEventListener("click", e => {
+  const card = e.target.closest(".beb"); if (!card) return;
+  const b = BEBIDAS.find(x => x.id === card.dataset.id);
+  const out = $("#beb-q-" + b.id);
+  const q = e.target.closest("[data-bq]");
+  if (q){ out.textContent = Math.max(1, Math.min(50, Number(out.textContent) + Number(q.dataset.bq))); return; }
+  if (!e.target.closest(".add")) return;
+  const sel = $("#beb-s-" + b.id);
+  if (sel && !sel.value){ sel.focus(); sel.style.borderColor = "var(--err)"; return; }
+  const sabor = sel ? sel.value : "";
+  const qtd = Number(out.textContent);
+  const ja = st.bebidas.find(x => x.id === b.id && x.sabor === sabor);
+  if (ja) ja.qtd += qtd; else st.bebidas.push({id:b.id, nome:b.nome, sabor, preco:b.preco, qtd});
+  out.textContent = 1; if (sel){ sel.value = ""; sel.style.borderColor = ""; }
+  card.classList.add("ok"); setTimeout(() => card.classList.remove("ok"), 900);
+  renderCart();
+});
+$("#bebs").addEventListener("change", e => { if (e.target.tagName === "SELECT") e.target.style.borderColor = ""; });
+const nomeBeb = x => x.nome + (x.sabor ? " – " + x.sabor : "");
+
 function totais(){
   const sub = st.cart.reduce((s,it) => s + precoLinha(it.m, it.qtd, it.emb, it.sal), 0);
+  const beb = st.bebidas.reduce((s,x) => s + x.preco * x.qtd, 0);
   const ent = document.querySelector('input[name="modo"]:checked').value === "entrega" ? TAXA_ENTREGA : 0;
-  return { sub, ent, tot: sub + (st.cart.length ? ent : 0) };
+  const tem = st.cart.length || st.bebidas.length;
+  return { sub, beb, ent, tot: sub + beb + (tem ? ent : 0) };
 }
 
 function renderCart(){
@@ -1040,16 +1146,26 @@ function renderCart(){
       <span class="v">${brl(precoLinha(it.m, it.qtd, it.emb, it.sal))}</span>
       <span class="s">${detalhe(it)}</span>
       <button type="button" class="rm" data-i="${i}">remover</button>
+    </li>`).join("") + st.bebidas.map((x,i) => `
+    <li class="bebl">
+      <b>${x.qtd}× ${nomeBeb(x)}</b>
+      <span class="v">${brl(x.preco * x.qtd)}</span>
+      <span class="s">${brl(x.preco)} cada</span>
+      <button type="button" class="rm" data-b="${i}">remover</button>
     </li>`).join("");
-  $("#cartEmpty").hidden = st.cart.length > 0;
+  $("#cartEmpty").hidden = st.cart.length + st.bebidas.length > 0;
   const t = totais();
   $("#tSub").textContent = brl(t.sub);
+  $("#tBebRow").hidden = !st.bebidas.length;
+  $("#tBeb").textContent = brl(t.beb);
   $("#tEnt").textContent = t.ent ? brl(t.ent) : "Retirada";
   $("#tTot").textContent = brl(t.tot);
 }
 $("#cartList").addEventListener("click", e => {
   const b = e.target.closest(".rm"); if (!b) return;
-  st.cart.splice(Number(b.dataset.i), 1); renderCart();
+  if (b.dataset.b !== undefined) st.bebidas.splice(Number(b.dataset.b), 1);
+  else st.cart.splice(Number(b.dataset.i), 1);
+  renderCart();
 });
 
 // Dados de envio
@@ -1077,19 +1193,23 @@ $("#fPed").addEventListener("submit", e => {
   const v = id => $(id).value.trim();
   const ent = $("#mEnt").checked;
   const pag = document.querySelector('input[name="pag"]:checked');
+  const agora = aplicarJanela();
   let msg = "";
-  if (!st.cart.length) msg = "Adicione pelo menos uma marmita ao pedido.";
-  else if (st.fechado) msg = "Estaremos fechados neste dia. Escolha outra data para o pedido.";
-  else if (st.restrito && st.cart.some(it => !it.m.individual)) msg = "Neste dia só servimos marmitas individuais. Remova as outras ou mude a data.";
+  if (!st.aberto) msg = "Os pedidos de marmitas estão fechados neste horário.";
+  else if (!st.cart.length) msg = "Adicione pelo menos uma marmita ao pedido. As bebidas acompanham as marmitas.";
+  else if (st.fechado) msg = "Hoje estamos fechados e não recebemos pedidos.";
+  else if (st.restrito && st.cart.some(it => !it.m.individual)) msg = "Hoje só servimos marmitas individuais. Remova as outras do pedido.";
   else if (!v("#pNome")) msg = "Informe seu nome e sobrenome.";
   else if (ent && !v("#pEnd")) msg = "Informe o endereço de entrega.";
   else if (!v("#pHora")) msg = "Informe o horário.";
   else if (v("#pHora") < HORA_ABRE || v("#pHora") > HORA_FECHA) msg = "Atendemos das 11h às 14h. Escolha um horário nesse intervalo.";
+  else if (v("#pHora") < agora.hm) msg = "Esse horário já passou. Escolha um horário a partir de agora.";
   else if (!pag) msg = "Escolha a forma de pagamento.";
   err.textContent = msg;
   if (msg) return;
   const t = totais();
   const linhas = st.cart.map((it,i) => `${i+1}) ${it.qtd}x ${it.m.grupo === "Individuais" ? "Individual" : "Marmita " + it.m.grupo} ${brl(it.m.preco)}\n   ${detalhe(it)}\n   Subtotal: ${brl(precoLinha(it.m, it.qtd, it.emb, it.sal))}`).join("\n");
+  const linhasBeb = st.bebidas.length ? "\n\n*Bebidas:*\n" + st.bebidas.map(x => `• ${x.qtd}x ${nomeBeb(x)} (${brl(x.preco)}) = ${brl(x.preco * x.qtd)}`).join("\n") : "";
   let pagTxt = pag.value;
   if (pag.value === "Dinheiro") pagTxt += v("#pTroco") ? ` (troco: ${v("#pTroco")})` : " (sem troco)";
   if (pag.value === "PIX") pagTxt += " (envio o comprovante em seguida)";
@@ -1097,13 +1217,13 @@ $("#fPed").addEventListener("submit", e => {
 `*Pedido de marmitas – Buffet Ize*
 *Data:* ${dataBr(diaSel)}
 
-${linhas}
+${linhas}${linhasBeb}
 
 *${ent ? "Entrega" : "Retirada no local"}*${ent ? `\n*Endereço:* ${v("#pEnd")}` : ""}
 *Horário:* ${v("#pHora")}
 *Pagamento:* ${pagTxt}
 
-Marmitas: ${brl(t.sub)}${ent ? `\nTaxa de entrega: ${brl(t.ent)}` : ""}
+Marmitas: ${brl(t.sub)}${st.bebidas.length ? `\nBebidas: ${brl(t.beb)}` : ""}${ent ? `\nTaxa de entrega: ${brl(t.ent)}` : ""}
 *Total: ${brl(t.tot)}*
 
 *Nome:* ${v("#pNome")}${v("#pObs") ? `\n*Informações adicionais:* ${v("#pObs")}` : ""}`;
@@ -1155,10 +1275,10 @@ fetch("cardapio.json", {cache:"no-store"})
   .then(r => r.ok ? r.json() : Promise.reject())
   .then(d => { CARDAPIO = d; aplicarCardapio(); })
   .catch(() => aplicarCardapio());
-const dIn = $("#mData");
-dIn.value = iso(diaSel); dIn.min = iso(new Date());
-dIn.addEventListener("change", () => { if (dIn.value){ diaSel = fromIso(dIn.value); avaliarDia(); } });
-renderSizes(); renderOpts(); updModo(); avaliarDia();
+diaSel = agoraSP().dia;
+renderSizes(); renderOpts(); renderBebidas(); updModo(); avaliarDia();
+aplicarJanela();
+setInterval(aplicarJanela, 30000);
 </script>
 
 </body>
