@@ -1,11 +1,11 @@
 {
-  "atualizado": "21/11/2026 (sábado)",
+  "atualizado": "24/11/2026 (terça-feira)",
   "exemplo": false,
   "bases": [
     "Arroz branco",
     "Arroz integral",
     "Feijão carioca",
-    "Macarrão parisiense"
+    "Macarrão na manteiga"
   ],
   "basesPadrao": [
     "Arroz branco",
@@ -13,20 +13,25 @@
   ],
   "carnes": [
     {
-      "nome": "Bife de fraldinha grelhado",
+      "nome": "Bife à milanesa",
       "tipo": "vermelha"
     },
     {
       "nome": "Frango desossado assado",
       "tipo": "branca"
+    },
+    {
+      "nome": "Salgadinhos variados",
+      "tipo": ""
     }
   ],
   "acompanhamentos": [
-    "Batatas sotê",
-    "Farofa Ize"
+    "Vagem e cenoura refogados",
+    "Jiló frito",
+    "Farofa de couve"
   ],
   "saladas": [
     "Folhas",
-    "Farofa fria"
+    "Almeirão fatiado"
   ]
 }

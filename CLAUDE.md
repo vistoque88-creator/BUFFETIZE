@@ -48,8 +48,10 @@ O cliente anexa um Word com o cardápio do dia e manda só "ATUALIZAR MARMITAS".
    ```
    - `tipo`: frango/peixe/aves = "branca"; boi/porco/linguiça = "vermelha" (importa nas marmitas de R$110 e R$160).
    - O Word traz vários dias (um por página) com o cardápio do restaurante e um bloco "MARMITAS".
-     Usar só a página/dia pedido e só o bloco MARMITAS. Linhas desse bloco (padrão visto em 21/11):
-     1ª = carnes / acompanhamentos; 2ª = feijão / massa; 3ª = arrozes; 4ª = saladas.
+     Usar o dia de hoje (ou a página que o cliente indicar) e só o bloco MARMITAS. O nº de linhas varia:
+     - 5 linhas (24/11): carnes / acompanhamentos / feijão e massa / arrozes / saladas.
+     - 4 linhas (21/11): carnes e acompanhamentos juntos na 1ª / feijão e massa / arrozes / saladas.
+     Itens que não são carne mas vêm na linha das carnes (ex.: salgadinhos) entram em `carnes` com `tipo: ""`.
    - Bases = arrozes + feijão + massa do dia; `basesPadrao` = o que já vem marcado (1º arroz + feijão).
 3. Commit + push na `main` (vai direto para buffetize.com.br). Opcional: atualizar também a prévia.
 4. Responder curto: o que entrou no cardápio + link do site.

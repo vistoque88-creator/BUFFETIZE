@@ -1011,7 +1011,7 @@ function renderOpts(){
     CARDAPIO.bases.map(b => chip("checkbox","base",b,b,(CARDAPIO.basesPadrao || ["Arroz","Feijão"]).includes(b))).join("")}</div></fieldset>`;
   const regra = m.mista ? "1 carne branca e 1 vermelha" : (m.carnes === 1 ? "escolha 1" : `escolha até ${m.carnes}`);
   h += `<fieldset class="optset"><legend class="legend">Carnes · ${regra}</legend><div class="chips">${
-    CARDAPIO.carnes.map(c => chip(m.carnes===1?"radio":"checkbox","carne",c.nome,c.nome,false,` <small>${c.tipo}</small>`)).join("")}</div></fieldset>`;
+    CARDAPIO.carnes.map(c => chip(m.carnes===1?"radio":"checkbox","carne",c.nome,c.nome,false,c.tipo ? ` <small>${c.tipo}</small>` : "")).join("")}</div></fieldset>`;
   h += `<fieldset class="optset"><legend class="legend">Acompanhamento · escolha 1</legend><div class="chips">${
     CARDAPIO.acompanhamentos.map(a => chip("radio","acomp",a,a,false)).join("")}</div></fieldset>`;
   if (m.salada) h += `<fieldset class="optset"><legend class="legend">Salada · escolha 1</legend><div class="chips">${
