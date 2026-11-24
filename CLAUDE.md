@@ -29,6 +29,7 @@ de apoio, `files: {"cardapio.json": "<repo>/cardapio.json", "img/x.jpg": "<repo>
 ## Domínio buffetize.com.br
 
 - Registrado pelo cliente no Registro.br (21/11/2026), em nome da empresa.
+- **No ar desde 24/11/2026**: DNS configurado (4 registros A + CNAME www), GitHub Pages com HTTPS ativo (cadeado confirmado pelo cliente).
 - DNS no Registro.br: registros A do domínio → 185.199.108.153, 185.199.109.153, 185.199.110.153,
   185.199.111.153; AAAA → 2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153;
   `www` CNAME → vistoque88-creator.github.io. Depois ativar "Enforce HTTPS" no GitHub (Settings → Pages).
@@ -118,7 +119,6 @@ Orçamento → Marmitas → Encomendas → Localização → Rodapé. Botão flu
 ## Pendências
 
 - Fotos reais dos eventos; feriados municipais; fatos da história.
-- Ligar buffetize.com.br: cliente ativar GitHub Pages (se ainda não estiver) e preencher o DNS no Registro.br.
 
 ## Cuidados técnicos
 
