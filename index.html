@@ -911,7 +911,7 @@ function pascoa(y){
 function feriado(d){
   const y = d.getFullYear(), md = `${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
   const fixos = {"01-01":"Confraternização Universal","04-21":"Tiradentes","05-01":"Dia do Trabalho","09-07":"Independência",
-    "07-09":"Revolução Constitucionalista (SP)","10-12":"Nossa Senhora Aparecida","11-02":"Finados","11-15":"Proclamação da República","11-20":"Consciência Negra","12-25":"Natal"};
+    "07-09":"Revolução Constitucionalista (SP)","07-16":"Aniversário de Jaboticabal","10-12":"Nossa Senhora Aparecida","11-02":"Finados","11-15":"Proclamação da República","11-20":"Consciência Negra","12-25":"Natal"};
   if (fixos[md]) return fixos[md];
   const p = pascoa(y), add = n => iso(new Date(p.getFullYear(), p.getMonth(), p.getDate()+n));
   if (iso(d) === add(-2)) return "Sexta-feira Santa";

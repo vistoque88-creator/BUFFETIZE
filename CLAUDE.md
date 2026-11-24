@@ -87,8 +87,8 @@ Todos os formulários montam a mensagem e abrem `https://wa.me/<num>?text=...`.
 - Pagamento: crédito, débito, dinheiro (pergunta troco), PIX chave CNPJ **40.360.468/0001-01** (pedir comprovante).
 - Cada tamanho aceita `foto` (caminho em `img/marmitas/`); aparece no cartão e no passo 3 quando selecionada.
 
-**Feriados:** nacionais calculados (inclui Sexta-feira Santa e Corpus Christi pela Páscoa, 20/11) + 09/07 (SP).
-Municipais de Jaboticabal: ainda não informados → `FERIADOS_EXTRAS`.
+**Feriados:** nacionais calculados (inclui Sexta-feira Santa e Corpus Christi pela Páscoa, 20/11) + 09/07 (SP)
++ **16/07 Aniversário de Jaboticabal** (único feriado municipal, informado pelo cliente em 24/11). Todos na lista fixa da função `feriado()`.
 **Dias fechados:** cliente avisa → incluir em `DIAS_FECHADOS` ({data:"AAAA-MM-DD", motivo:"..."}); bloqueia pedidos e mostra "fechado".
 
 **Restaurante:** todos os dias 11h–14h. Self-service por kg: seg–sex R$84,90; sábados e feriados R$98,90; domingos R$101,90.
@@ -118,7 +118,7 @@ Orçamento → Marmitas → Encomendas → Localização → Rodapé. Botão flu
 
 ## Pendências
 
-- Fotos reais dos eventos; feriados municipais; fatos da história.
+- Fotos reais dos eventos; fatos da história.
 
 ## Cuidados técnicos
 
