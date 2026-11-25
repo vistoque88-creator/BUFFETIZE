@@ -46,6 +46,7 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{background:var(--ivory);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--choc-3)}
@@ -614,7 +615,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
           <fieldset class="optset">
             <legend class="legend">Como quer receber?</legend>
             <div class="chips">
-              <label class="chip"><input type="radio" name="modo" value="entrega" id="mEnt" checked> Entrega (+ R$ 8,00)</label>
+              <label class="chip"><input type="radio" name="modo" value="cidade" id="mEnt" checked> Entrega na cidade (+ R$ 8,00)</label>
+              <label class="chip"><input type="radio" name="modo" value="rural" id="mRural"> Entrega na Unesp ou zona rural (+ R$ 16,00)</label>
               <label class="chip"><input type="radio" name="modo" value="retirada" id="mRet"> Retirar no local</label>
             </div>
           </fieldset>
@@ -730,7 +732,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
       <div class="logo-big"><img src="img/logo.png" alt="Logo Buffet Ize" width="538" height="464">
         <p style="margin-top:10px">Buffet, restaurante e rotisseria.<br>Empresa familiar desde 1995.</p></div>
       <div><h4>Pedidos e eventos</h4><ul><li>WhatsApp (16) 3204-3321</li><li>Fim de ano (16) 3202-3260</li><li>Instagram <a href="https://www.instagram.com/buffetize_/" target="_blank" rel="noopener">@buffetize_</a></li></ul></div>
-      <div><h4>Restaurante</h4><ul><li>Rua Francisco Ferrari, 171, Jd. Morumbi</li><li>Todos os dias, 11h às 14h</li></ul><h4 style="margin-top:18px">Escritório comercial</h4><ul><li>Rua Cel. Odilon Ortiz, 60, Nova Jaboticabal</li><li>Jaboticabal, SP</li></ul><h4 style="margin-top:18px">Marmitas</h4><ul><li>Segunda a sábado: todas</li><li>Domingos e feriados: individuais</li><li>Taxa de entrega R$ 8,00</li></ul></div>
+      <div><h4>Restaurante</h4><ul><li>Rua Francisco Ferrari, 171, Jd. Morumbi</li><li>Todos os dias, 11h às 14h</li></ul><h4 style="margin-top:18px">Escritório comercial</h4><ul><li>Rua Cel. Odilon Ortiz, 60, Nova Jaboticabal</li><li>Jaboticabal, SP</li></ul><h4 style="margin-top:18px">Marmitas</h4><ul><li>Segunda a sábado: todas</li><li>Domingos e feriados: individuais</li><li>Entrega na cidade R$ 8,00</li><li>Unesp ou zona rural R$ 16,00</li></ul></div>
       <div><h4>Pagamento</h4><ul><li>Crédito e débito</li><li>Dinheiro</li><li>PIX: CNPJ 40.360.468/0001-01</li></ul></div>
     </div>
     <div class="copy-line"><span>© <span id="ano">2026</span> Buffet Ize · CNPJ 40.360.468/0001-01</span><span>Fotos ilustrativas</span></div>
@@ -745,7 +747,11 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
    ============================================================ */
 const WA_PRINCIPAL = "551632043321";   // (16) 3204-3321
 const WA_FIM_ANO   = "551632023260";   // (16) 3202-3260
-const TAXA_ENTREGA = 8;
+// Taxas de entrega
+const TAXAS_ENTREGA = {
+  cidade: {valor:8,  nome:"Entrega na cidade"},
+  rural:  {valor:16, nome:"Entrega na Unesp ou zona rural"},
+};
 const PRECO_EMBALAGEM = 5;
 const PRECO_SALADA = 4;
 
@@ -1133,7 +1139,8 @@ const nomeBeb = x => x.nome + (x.sabor ? " – " + x.sabor : "");
 function totais(){
   const sub = st.cart.reduce((s,it) => s + precoLinha(it.m, it.qtd, it.emb, it.sal), 0);
   const beb = st.bebidas.reduce((s,x) => s + x.preco * x.qtd, 0);
-  const ent = document.querySelector('input[name="modo"]:checked').value === "entrega" ? TAXA_ENTREGA : 0;
+  const tx = TAXAS_ENTREGA[document.querySelector('input[name="modo"]:checked').value];
+  const ent = tx ? tx.valor : 0;
   const tem = st.cart.length || st.bebidas.length;
   return { sub, beb, ent, tot: sub + beb + (tem ? ent : 0) };
 }
@@ -1169,8 +1176,9 @@ $("#cartList").addEventListener("click", e => {
 });
 
 // Dados de envio
+const ehEntrega = () => !$("#mRet").checked;
 function updModo(){
-  const ent = $("#mEnt").checked;
+  const ent = ehEntrega();
   $("#endWrap").hidden = !ent;
   renderCart();
 }
@@ -1191,7 +1199,8 @@ $("#fPed").addEventListener("submit", e => {
   e.preventDefault();
   const err = $("#pErr");
   const v = id => $(id).value.trim();
-  const ent = $("#mEnt").checked;
+  const ent = ehEntrega();
+  const modoTx = TAXAS_ENTREGA[document.querySelector('input[name="modo"]:checked').value];
   const pag = document.querySelector('input[name="pag"]:checked');
   const agora = aplicarJanela();
   let msg = "";
@@ -1219,7 +1228,7 @@ $("#fPed").addEventListener("submit", e => {
 
 ${linhas}${linhasBeb}
 
-*${ent ? "Entrega" : "Retirada no local"}*${ent ? `\n*Endereço:* ${v("#pEnd")}` : ""}
+*${ent ? modoTx.nome : "Retirada no local"}*${ent ? `\n*Endereço:* ${v("#pEnd")}` : ""}
 *Horário:* ${v("#pHora")}
 *Pagamento:* ${pagTxt}
 

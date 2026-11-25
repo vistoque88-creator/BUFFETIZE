@@ -83,7 +83,8 @@ Todos os formulários montam a mensagem e abrem `https://wa.me/<num>?text=...`.
   Fanta Laranja, Fanta Uva, água tônica, tônica zero); água com/sem gás R$5; refrigerante 600 ml R$10 e 2 L R$16
   (Coca, Coca Zero, Guaraná, Guaraná Zero); H2O limão/limoneto R$9; Jaboti 250 ml R$3; Jaboti 2 L R$8.
   Outras bebidas: cliente escreve em "Informações adicionais". Pedido exige ao menos 1 marmita.
-- Entrega R$8 (endereço obrigatório) ou retirada. Horário entre 11h e 14h.
+- Entrega (`TAXAS_ENTREGA`): **na cidade R$8**; **Unesp ou zona rural (fora do perímetro urbano) R$16** (desde 25/11);
+  endereço obrigatório em ambas. Ou retirada no local. Horário entre 11h e 14h.
 - Pagamento: crédito, débito, dinheiro (pergunta troco), PIX chave CNPJ **40.360.468/0001-01** (pedir comprovante).
 - Cada tamanho aceita `foto` (caminho em `img/marmitas/`); aparece no cartão e no passo 3 quando selecionada.
 
