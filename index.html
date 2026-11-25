@@ -290,6 +290,13 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
 .ped-status b{font-weight:600}
 .ped-status.off{border-color:#e7b9a3;background:#fbeee2;color:#7a3416}
 .mm.off #mmPassos{opacity:.45;filter:grayscale(.4)}
+/* Entrega por CEP */
+.entrega{display:grid;gap:14px;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ivory)}
+.cep-status{align-self:end}
+.cep-info{display:inline-block;font-size:.92rem;padding:10px 0;color:var(--muted)}
+.cep-info.ok{color:var(--ok);font-weight:500}
+.cep-info.warn{color:var(--err);font-weight:500}
+.semcep{justify-self:start}
 /* Bebidas */
 .bebs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
 .beb{display:grid;gap:8px;align-content:start;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ivory)}
@@ -615,12 +622,33 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
           <fieldset class="optset">
             <legend class="legend">Como quer receber?</legend>
             <div class="chips">
-              <label class="chip"><input type="radio" name="modo" value="cidade" id="mEnt" checked> Entrega na cidade (+ R$ 8,00)</label>
-              <label class="chip"><input type="radio" name="modo" value="rural" id="mRural"> Entrega na Unesp ou zona rural (+ R$ 16,00)</label>
+              <label class="chip"><input type="radio" name="modo" value="entrega" id="mEnt" checked> Entrega</label>
               <label class="chip"><input type="radio" name="modo" value="retirada" id="mRet"> Retirar no local</label>
             </div>
           </fieldset>
-          <div class="field" id="endWrap"><label for="pEnd">Endereço de entrega</label><input id="pEnd" autocomplete="street-address" placeholder="Rua, número, bairro e ponto de referência"></div>
+          <div class="entrega" id="endWrap">
+            <p class="hint">Taxa de entrega: na cidade R$ 8,00 · Unesp ou zona rural R$ 16,00. Digite o CEP que a taxa e o endereço aparecem sozinhos.</p>
+            <div class="row">
+              <div class="field"><label for="pCep">CEP</label><input id="pCep" inputmode="numeric" autocomplete="postal-code" maxlength="9" placeholder="14870-000"></div>
+              <div class="field cep-status"><span class="cep-info" id="cepInfo" aria-live="polite"></span></div>
+            </div>
+            <label class="chip semcep"><input type="checkbox" id="semCep"> Não sei o CEP / moro na zona rural</label>
+            <fieldset class="optset" id="zonaWrap" hidden>
+              <legend class="legend">Onde é a entrega?</legend>
+              <div class="chips">
+                <label class="chip"><input type="radio" name="zona" value="cidade" id="zCidade"> Na cidade (+ R$ 8,00)</label>
+                <label class="chip"><input type="radio" name="zona" value="rural" id="zRural"> Unesp ou zona rural (+ R$ 16,00)</label>
+              </div>
+            </fieldset>
+            <div class="row">
+              <div class="field"><label for="pEnd">Rua</label><input id="pEnd" autocomplete="address-line1" placeholder="Rua, avenida ou estrada"></div>
+              <div class="field"><label for="pNum">Número</label><input id="pNum" autocomplete="address-line2" placeholder="Ex.: 171 ou s/n"></div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="pBairro">Bairro ou sítio</label><input id="pBairro" placeholder="Bairro, sítio ou fazenda"></div>
+              <div class="field"><label for="pRef">Referência (opcional)</label><input id="pRef" placeholder="Ex.: casa de esquina, portão azul"></div>
+            </div>
+          </div>
           <div class="field"><label for="pHora">Horário</label><input id="pHora" type="time" min="11:00" max="14:00" step="900" required style="max-width:200px"><span class="hint">Das 11h às 14h</span></div>
           <fieldset class="optset">
             <legend class="legend">Forma de pagamento</legend>
@@ -752,6 +780,10 @@ const TAXAS_ENTREGA = {
   cidade: {valor:8,  nome:"Entrega na cidade"},
   rural:  {valor:16, nome:"Entrega na Unesp ou zona rural"},
 };
+// CEP: consulta gratuita no ViaCEP. Estes CEPs sempre pagam a taxa da Unesp/zona rural:
+const CEPS_RURAIS = ["14884-900"];   // Unesp Jaboticabal
+const CIDADE_ENTREGA = "Jaboticabal";
+const PALAVRAS_RURAIS = /unesp|rural|s[íi]tio|fazenda|ch[áa]cara|estrada|rodovia|vicinal|km\s?\d/i;
 const PRECO_EMBALAGEM = 5;
 const PRECO_SALADA = 4;
 
@@ -1139,7 +1171,7 @@ const nomeBeb = x => x.nome + (x.sabor ? " – " + x.sabor : "");
 function totais(){
   const sub = st.cart.reduce((s,it) => s + precoLinha(it.m, it.qtd, it.emb, it.sal), 0);
   const beb = st.bebidas.reduce((s,x) => s + x.preco * x.qtd, 0);
-  const tx = TAXAS_ENTREGA[document.querySelector('input[name="modo"]:checked').value];
+  const tx = ehEntrega() ? TAXAS_ENTREGA[st.zona] : null;
   const ent = tx ? tx.valor : 0;
   const tem = st.cart.length || st.bebidas.length;
   return { sub, beb, ent, tot: sub + beb + (tem ? ent : 0) };
@@ -1165,7 +1197,7 @@ function renderCart(){
   $("#tSub").textContent = brl(t.sub);
   $("#tBebRow").hidden = !st.bebidas.length;
   $("#tBeb").textContent = brl(t.beb);
-  $("#tEnt").textContent = t.ent ? brl(t.ent) : "Retirada";
+  $("#tEnt").textContent = !ehEntrega() ? "Retirada" : (t.ent ? brl(t.ent) : "Digite o CEP");
   $("#tTot").textContent = brl(t.tot);
 }
 $("#cartList").addEventListener("click", e => {
@@ -1177,11 +1209,65 @@ $("#cartList").addEventListener("click", e => {
 
 // Dados de envio
 const ehEntrega = () => !$("#mRet").checked;
+st.zona = null;   // "cidade" | "rural" | null (ainda não definida)
 function updModo(){
   const ent = ehEntrega();
   $("#endWrap").hidden = !ent;
   renderCart();
 }
+function cepMsg(txt, cls){ const e = $("#cepInfo"); e.textContent = txt; e.className = "cep-info" + (cls ? " " + cls : ""); }
+function definirZona(z){
+  st.zona = z;
+  $("#zCidade").checked = z === "cidade"; $("#zRural").checked = z === "rural";
+  renderCart();
+}
+let cepSeq = 0, autoRua = "", autoBairro = "";
+const mostrarZona = on => { $("#zonaWrap").hidden = !on; if (!on){ $("#zCidade").checked = $("#zRural").checked = false; } };
+// Preenche rua/bairro só se o cliente não tiver digitado outra coisa
+function autoPreencher(rua, bairro){
+  if (!$("#pEnd").value || $("#pEnd").value === autoRua) $("#pEnd").value = rua;
+  if (!$("#pBairro").value || $("#pBairro").value === autoBairro) $("#pBairro").value = bairro;
+  autoRua = rua; autoBairro = bairro;
+}
+async function buscarCep(){
+  const dig = $("#pCep").value.replace(/\D/g, "");
+  const meu = ++cepSeq;
+  if (dig.length !== 8){ definirZona(null); mostrarZona(false); autoPreencher("", ""); cepMsg(dig.length ? "Digite os 8 números do CEP." : ""); return; }
+  const cep = dig.slice(0,5) + "-" + dig.slice(5);
+  cepMsg("Buscando o CEP…");
+  let d = null;
+  try {
+    const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 7000);
+    const r = await fetch(`https://viacep.com.br/ws/${dig}/json/`, {signal: ctl.signal});
+    clearTimeout(to);
+    d = r.ok ? await r.json() : null;
+  } catch(e) { d = null; }
+  if (meu !== cepSeq || $("#semCep").checked) return;   // resposta antiga ou cliente mudou de ideia
+  definirZona(null);
+  if (!d){ autoPreencher("", ""); mostrarZona(true); cepMsg("Não consegui consultar o CEP agora. Escolha abaixo onde é a entrega.", "warn"); return; }
+  if (d.erro){ autoPreencher("", ""); mostrarZona(false); cepMsg("CEP não encontrado. Confira o número ou marque “Não sei o CEP / zona rural”.", "warn"); return; }
+  if ((d.localidade || "").toLowerCase() !== CIDADE_ENTREGA.toLowerCase()){
+    autoPreencher("", ""); mostrarZona(false); cepMsg(`Esse CEP é de ${d.localidade}/${d.uf}. Entregamos só em ${CIDADE_ENTREGA}.`, "warn"); return; }
+  autoPreencher(d.logradouro || "", d.bairro || "");
+  if (!d.logradouro && !CEPS_RURAIS.includes(cep)){
+    mostrarZona(true); cepMsg("Esse é o CEP geral da cidade. Escolha abaixo onde é a entrega.", "warn"); return; }
+  const rural = CEPS_RURAIS.includes(cep) || PALAVRAS_RURAIS.test([d.logradouro, d.bairro, d.complemento].join(" "));
+  mostrarZona(false);
+  definirZona(rural ? "rural" : "cidade");
+  cepMsg(rural ? "Unesp ou zona rural: taxa de R$ 16,00." : `${d.bairro || CIDADE_ENTREGA}: taxa de R$ 8,00.`, "ok");
+  if (!$("#pNum").value) $("#pNum").focus();
+}
+$("#pCep").addEventListener("input", e => {
+  const dg = e.target.value.replace(/\D/g, "").slice(0, 8);
+  e.target.value = dg.length > 5 ? dg.slice(0,5) + "-" + dg.slice(5) : dg;
+  $("#semCep").checked = false;
+  buscarCep();
+});
+$("#semCep").addEventListener("change", e => {
+  if (e.target.checked){ cepSeq++; definirZona(null); mostrarZona(true); cepMsg(""); }
+  else { mostrarZona(false); buscarCep(); }
+});
+document.querySelectorAll('input[name="zona"]').forEach(r => r.addEventListener("change", () => definirZona(r.value)));
 document.querySelectorAll('input[name="modo"]').forEach(r => r.addEventListener("change", updModo));
 document.querySelectorAll('input[name="pag"]').forEach(r => r.addEventListener("change", () => {
   const v = document.querySelector('input[name="pag"]:checked').value;
@@ -1200,7 +1286,7 @@ $("#fPed").addEventListener("submit", e => {
   const err = $("#pErr");
   const v = id => $(id).value.trim();
   const ent = ehEntrega();
-  const modoTx = TAXAS_ENTREGA[document.querySelector('input[name="modo"]:checked').value];
+  const modoTx = TAXAS_ENTREGA[st.zona];
   const pag = document.querySelector('input[name="pag"]:checked');
   const agora = aplicarJanela();
   let msg = "";
@@ -1209,7 +1295,8 @@ $("#fPed").addEventListener("submit", e => {
   else if (st.fechado) msg = "Hoje estamos fechados e não recebemos pedidos.";
   else if (st.restrito && st.cart.some(it => !it.m.individual)) msg = "Hoje só servimos marmitas individuais. Remova as outras do pedido.";
   else if (!v("#pNome")) msg = "Informe seu nome e sobrenome.";
-  else if (ent && !v("#pEnd")) msg = "Informe o endereço de entrega.";
+  else if (ent && !st.zona) msg = $("#semCep").checked ? "Escolha onde é a entrega: na cidade ou Unesp/zona rural." : "Digite um CEP de Jaboticabal válido ou marque “Não sei o CEP / zona rural”.";
+  else if (ent && (!v("#pEnd") || !v("#pNum") || !v("#pBairro"))) msg = "Complete o endereço: rua, número e bairro.";
   else if (!v("#pHora")) msg = "Informe o horário.";
   else if (v("#pHora") < HORA_ABRE || v("#pHora") > HORA_FECHA) msg = "Atendemos das 11h às 14h. Escolha um horário nesse intervalo.";
   else if (v("#pHora") < agora.hm) msg = "Esse horário já passou. Escolha um horário a partir de agora.";
@@ -1228,7 +1315,7 @@ $("#fPed").addEventListener("submit", e => {
 
 ${linhas}${linhasBeb}
 
-*${ent ? modoTx.nome : "Retirada no local"}*${ent ? `\n*Endereço:* ${v("#pEnd")}` : ""}
+*${ent ? modoTx.nome : "Retirada no local"}*${ent ? `\n*Endereço:* ${v("#pEnd")}, ${v("#pNum")} – ${v("#pBairro")}${v("#pCep") ? " – CEP " + v("#pCep") : ""}${v("#pRef") ? `\n*Referência:* ${v("#pRef")}` : ""}` : ""}
 *Horário:* ${v("#pHora")}
 *Pagamento:* ${pagTxt}
 

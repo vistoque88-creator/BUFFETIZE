@@ -83,8 +83,13 @@ Todos os formulários montam a mensagem e abrem `https://wa.me/<num>?text=...`.
   Fanta Laranja, Fanta Uva, água tônica, tônica zero); água com/sem gás R$5; refrigerante 600 ml R$10 e 2 L R$16
   (Coca, Coca Zero, Guaraná, Guaraná Zero); H2O limão/limoneto R$9; Jaboti 250 ml R$3; Jaboti 2 L R$8.
   Outras bebidas: cliente escreve em "Informações adicionais". Pedido exige ao menos 1 marmita.
-- Entrega (`TAXAS_ENTREGA`): **na cidade R$8**; **Unesp ou zona rural (fora do perímetro urbano) R$16** (desde 25/11);
-  endereço obrigatório em ambas. Ou retirada no local. Horário entre 11h e 14h.
+- Entrega (`TAXAS_ENTREGA`): **na cidade R$8**; **Unesp ou zona rural R$16** (desde 25/11). Ou retirada no local.
+  **Taxa automática pelo CEP** (desde 25/11): o site consulta o ViaCEP no navegador do cliente, preenche rua e bairro
+  e escolhe a taxa: CEP em `CEPS_RURAIS` (Unesp 14884-900) ou texto com sítio/fazenda/chácara/estrada/rural → R$16;
+  outro CEP de Jaboticabal com rua → R$8; CEP de outra cidade → bloqueia; CEP geral (sem rua), não encontrado ou
+  falha na consulta → cliente escolhe a zona à mão. Opção "Não sei o CEP / moro na zona rural" sempre disponível.
+  Endereço: rua, número e bairro obrigatórios; referência opcional. A prévia (artifact) não consegue consultar CEP.
+  Horário de entrega entre 11h e 14h.
 - Pagamento: crédito, débito, dinheiro (pergunta troco), PIX chave CNPJ **40.360.468/0001-01** (pedir comprovante).
 - Cada tamanho aceita `foto` (caminho em `img/marmitas/`); aparece no cartão e no passo 3 quando selecionada.
 
