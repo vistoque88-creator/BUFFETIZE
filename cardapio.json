@@ -1,11 +1,11 @@
 {
-  "atualizado": "25/11/2026 (quarta-feira)",
+  "atualizado": "26/11/2026 (quinta-feira)",
   "exemplo": false,
   "bases": [
     "Arroz branco",
     "Arroz integral",
     "Feijão carioca",
-    "Macarrão ao bacon e salsa"
+    "Macarrão ao pesto"
   ],
   "basesPadrao": [
     "Arroz branco",
@@ -13,25 +13,25 @@
   ],
   "carnes": [
     {
-      "nome": "Contra filé fatiado ao molho gengibre",
+      "nome": "Bisteca bovina grelhada",
       "tipo": "vermelha"
     },
     {
-      "nome": "Filé de frango supremo",
+      "nome": "Frango desossado ao tempero sírio",
       "tipo": "branca"
     },
     {
-      "nome": "Filhote assado ao vinagrete",
-      "tipo": "branca"
+      "nome": "Croquete de carne e queijo",
+      "tipo": "vermelha"
     }
   ],
   "acompanhamentos": [
-    "Chuchu refogado",
-    "Repolho refogado",
-    "Farofa ao alho"
+    "Batata doce frita",
+    "Legumes na manteiga",
+    "Farofa"
   ],
   "saladas": [
     "Folhas",
-    "Salada de macarrão e legumes"
+    "Repolho cozido temperado"
   ]
 }
